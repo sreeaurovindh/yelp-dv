@@ -3,28 +3,46 @@ import java.util.List;
 
 import org.json.*;
 
-public class SimpleRunner {
+public class SimpleRunner extends Thread {
+    String filePath;
+    public SimpleRunner(String fileInput){
+        this.filePath = fileInput;
+    }
+    public void run(){
+        RunAspect();
+    }
 
     public static void main(String[] args) {
-        String csvFile = "D:\\Dropbox\\dv\\yelp_dataset_challenge_academic_dataset\\yelp_academic_dataset_review.json";
+        File[] files = new File("D:\\Dropbox\\dv\\review_input\\").listFiles();
+        for(File file:files){
+            new SimpleRunner(file.getName()).start();
+        }
+
+
+    }
+    public void RunAspect(){
+        String csvFile = "D:\\Dropbox\\dv\\review_input\\"+filePath;
         BufferedReader br = null;
         String line = "";
 
 
         try {
-            PrintWriter out = new PrintWriter("D:\\Dropbox\\dv\\yelp_cleaned\\review.json");
+            String directoryOut = "D:\\Dropbox\\dv\\review_output\\";
+            directoryOut= directoryOut+filePath+"_out.json";
+
+            PrintWriter out = new PrintWriter(directoryOut);
 
             br = new BufferedReader(new FileReader(csvFile));
             br.readLine(); //skip First line
             while ((line = br.readLine()) != null) {
-              JSONObject obj = new JSONObject(line);
-              String reviewText = obj.get("text").toString();
-              String cleanedText = reviewText.replaceAll("\n"," ").replaceAll("\\s\\s+/g", " ");
-              String aspect = getAspect(cleanedText);
-              obj.append("Aspect",aspect);
-              String output =obj.toString();
-              out.println(output);
-              out.flush();
+                JSONObject obj = new JSONObject(line);
+                String reviewText = obj.get("text").toString();
+                String cleanedText = reviewText.replaceAll("\n"," ").replaceAll("\\s\\s+/g", " ");
+                String aspect = getAspect(cleanedText);
+                obj.append("Aspect",aspect);
+                String output =obj.toString();
+                out.println(output);
+                out.flush();
             }
 
 
@@ -42,10 +60,8 @@ public class SimpleRunner {
                 }
             }
         }
-
-
     }
-    public static String getAspect(String input){
+    public String getAspect(String input){
         StringBuilder output = new StringBuilder();
         Extract extract = new Extract();
         List<Pattern> patterns = extract.run(input);
