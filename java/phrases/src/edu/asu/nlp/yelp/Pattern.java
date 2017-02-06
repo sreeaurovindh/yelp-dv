@@ -70,6 +70,9 @@ public class Pattern {
     public String getModifier(){
     	return modifier;
     }
+    public String getHead(){
+    	return head;
+    }
 
     @Override
     public String toString() {
