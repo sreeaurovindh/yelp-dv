@@ -63,40 +63,43 @@ public class SimpleRunner extends Thread {
 
             br = new BufferedReader(new FileReader(jsonFile));
             br.readLine(); //skip First line
-            int count = 0;
+
             while ((line = br.readLine()) != null) {
-            	count += 1;
-                JSONObject obj = new JSONObject(line);
-                String reviewText = obj.get("text").toString();
-                String businessId = obj.get("business_id").toString();
-                String reviewId = obj.getString("review_id");
-                double stars = obj.getDouble("stars");
-                String date = obj.get("date").toString();
-                int useful = obj.getInt("useful");
-                int funny = obj.getInt("funny");
-                
-              
-                
-                ArrayList<AspectData> aspect = getAspect(reviewText);
-                Iterator<AspectData> aspItr = aspect.iterator();
-                while(aspItr.hasNext()){
-                	AspectData data = aspItr.next();
-                	JSONObject newObject = new JSONObject();
-                	newObject.put("item", data.getItem());
-                	newObject.put("value", data.getValue());
-                	newObject.put("polarity",data.getPolarity());
-                	newObject.put("business_id", businessId);
-                	newObject.put("reviewId", reviewId);
-                	newObject.put("rev_stars",stars);
-                	newObject.put("date", date);
-                	newObject.put("useful",useful);
-                	newObject.put("funny",funny);
-                	newObject.put("is_review", 1);
-                	newObject.put("is_tip", 0);
-//                	System.out.println(newObject);
-                	out.println(newObject);
-                	out.flush();
-                }
+            	try{
+	                JSONObject obj = new JSONObject(line);
+	                String reviewText = obj.get("text").toString();
+	                String businessId = obj.get("business_id").toString();
+	                String reviewId = obj.getString("review_id");
+	                double stars = obj.getDouble("stars");
+	                String date = obj.get("date").toString();
+	                int useful = obj.getInt("useful");
+	                int funny = obj.getInt("funny");
+	                
+	              
+	                
+	                ArrayList<AspectData> aspect = getAspect(reviewText);
+	                Iterator<AspectData> aspItr = aspect.iterator();
+	                while(aspItr.hasNext()){
+	                	AspectData data = aspItr.next();
+	                	JSONObject newObject = new JSONObject();
+	                	newObject.put("item", data.getItem());
+	                	newObject.put("value", data.getValue());
+	                	newObject.put("polarity",data.getPolarity());
+	                	newObject.put("business_id", businessId);
+	                	newObject.put("reviewId", reviewId);
+	                	newObject.put("rev_stars",stars);
+	                	newObject.put("date", date);
+	                	newObject.put("useful",useful);
+	                	newObject.put("funny",funny);
+	                	newObject.put("is_review", 1);
+	                	newObject.put("is_tip", 0);
+	//                	System.out.println(newObject);
+	                	out.println(newObject);
+	                	out.flush();
+	                }
+            	}catch(Exception e){
+            		e.printStackTrace();
+            	}
 //                System.out.println("Total Reveiws processed:"+count);
                  
             }
