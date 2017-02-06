@@ -39,7 +39,9 @@ public class SimpleRunner extends Thread {
     	readPreferences();
         File[] files = new File(inputFolder).listFiles();
         for(File file:files){
-            new SimpleRunner(file.getName()).start();
+            SimpleRunner thread = new SimpleRunner(file.getName());
+            thread.setPriority(2);
+            thread.start();
         }
 
 
