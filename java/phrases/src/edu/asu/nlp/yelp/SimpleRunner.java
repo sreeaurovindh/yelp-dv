@@ -15,12 +15,14 @@ public class SimpleRunner extends Thread {
 	private static String sentiwordDoc;
 	private Extract extract;
 	
-
+	public void setExtract(Extract extract){
+		this.extract=extract;
+	}
     public SimpleRunner(String fileInput){
         this.filePath = fileInput;
         try {
 			this.analyser =  new SentimentAnalyser(sentiwordDoc);
-			this.extract = new Extract();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,6 +53,15 @@ public class SimpleRunner extends Thread {
         File[] files = new File(inputFolder).listFiles();
         for(File file:files){
             SimpleRunner thread = new SimpleRunner(file.getName());
+            Extract extract = new Extract();
+            thread.setExtract(extract);
+            try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
             thread.setPriority(2);
             thread.start();
         }
