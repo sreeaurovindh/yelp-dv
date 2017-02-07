@@ -17,15 +17,13 @@ public class Extract {
 
     final String stopwordsFile = "nlp-files/stopwords.txt";
     List<String> stopwords;
-    StanfordCoreNLP pipeline;
+  
 
     public Extract() {
 
         try {
             stopwords = LoadStopwords();
-            Properties props = new Properties();
-            props.setProperty("annotators", "tokenize, ssplit, pos, parse");
-            pipeline = new StanfordCoreNLP(props);
+           
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -124,8 +122,11 @@ public class Extract {
     }
 
     public List<Pattern> run(String text) {
-    
+    	 Properties props = new Properties();
+         props.setProperty("annotators", "tokenize, ssplit, pos, parse");
+   
         List<Pattern> patterns = new ArrayList<Pattern>();      
+        StanfordCoreNLP pipeline = new StanfordCoreNLP(props);
         Annotation annotation = pipeline.process(text);
         List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
         for (CoreMap sentence : sentences) {

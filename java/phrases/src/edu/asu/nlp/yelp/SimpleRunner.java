@@ -13,11 +13,7 @@ public class SimpleRunner extends Thread {
 	private static String inputFolder;
 	private static String outputFolder;
 	private static String sentiwordDoc;
-	private Extract extract;
-	
-	public void setExtract(Extract extract){
-		this.extract=extract;
-	}
+	 
     public SimpleRunner(String fileInput){
         this.filePath = fileInput;
         try {
@@ -53,8 +49,8 @@ public class SimpleRunner extends Thread {
         File[] files = new File(inputFolder).listFiles();
         for(File file:files){
             SimpleRunner thread = new SimpleRunner(file.getName());
-            Extract extract = new Extract();
-            thread.setExtract(extract);
+           
+             
             try {
 				Thread.sleep(3000);
 			} catch (InterruptedException e) {
@@ -148,7 +144,7 @@ public class SimpleRunner extends Thread {
     }
     public ArrayList<AspectData> getAspect(String input){
     	ArrayList<AspectData> output = new ArrayList<AspectData>();
-      
+    	Extract extract = new Extract();
         List<Pattern> patterns = extract.run(input);
         for (Pattern pattern : patterns) {
         	String typeOfWord = pattern.getModifierTag();
