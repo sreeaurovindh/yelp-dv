@@ -9,12 +9,22 @@ import org.json.*;
 
 public class SimpleRunner extends Thread {
     private String filePath;
-    private static SentimentAnalyser analyser;
+    private  SentimentAnalyser analyser;
 	private static String inputFolder;
 	private static String outputFolder;
+	private static String sentiwordDoc;
+	private Extract extract;
+	
 
     public SimpleRunner(String fileInput){
         this.filePath = fileInput;
+        try {
+			this.analyser =  new SentimentAnalyser(sentiwordDoc);
+			this.extract = new Extract();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
        
     }
     public void run(){
@@ -25,9 +35,10 @@ public class SimpleRunner extends Thread {
     		Properties prop = new Properties();
     		 InputStream propertiesInput = new FileInputStream("bucket-info.properties");
     		 prop.load(propertiesInput);
- 			analyser = new SentimentAnalyser(prop.getProperty("sentiword_doc"));
+ 			
  			inputFolder = prop.getProperty("input_folder");
  			outputFolder = prop.getProperty("output_folder");
+ 			sentiwordDoc = prop.getProperty("sentiword_doc");
  			
  		} catch (IOException e) {
  			// TODO Auto-generated catch block
@@ -53,7 +64,7 @@ public class SimpleRunner extends Thread {
         String jsonFile = inputFolder+filePath;
         BufferedReader br = null;
         String line = "";
-
+        int count = 0;
 
         try {
  
@@ -93,7 +104,11 @@ public class SimpleRunner extends Thread {
 	                	newObject.put("funny",funny);
 	                	newObject.put("is_review", 1);
 	                	newObject.put("is_tip", 0);
-	//                	System.out.println(newObject);
+//	                	System.out.println(newObject);
+	                	count ++;
+	                	if(count%100000 ==0){
+	                		System.out.println(Thread.currentThread().getName()+"_____"+count);
+	                	}
 	                	out.println(newObject);
 	                	out.flush();
 	                }
@@ -122,7 +137,7 @@ public class SimpleRunner extends Thread {
     }
     public ArrayList<AspectData> getAspect(String input){
     	ArrayList<AspectData> output = new ArrayList<AspectData>();
-        Extract extract = new Extract();
+      
         List<Pattern> patterns = extract.run(input);
         for (Pattern pattern : patterns) {
         	String typeOfWord = pattern.getModifierTag();
