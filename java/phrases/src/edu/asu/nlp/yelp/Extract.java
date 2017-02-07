@@ -124,12 +124,14 @@ public class Extract {
     }
 
     public List<Pattern> run(String text) {
+    
         List<Pattern> patterns = new ArrayList<Pattern>();      
         Annotation annotation = pipeline.process(text);
         List<CoreMap> sentences = annotation.get(CoreAnnotations.SentencesAnnotation.class);
         for (CoreMap sentence : sentences) {
             patterns.addAll(ExtractSentencePatterns(sentence));
         }
+    	
 
         return patterns;
     }
