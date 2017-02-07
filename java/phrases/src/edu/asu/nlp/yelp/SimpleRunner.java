@@ -50,13 +50,7 @@ public class SimpleRunner extends Thread {
         for(File file:files){
             SimpleRunner thread = new SimpleRunner(file.getName());
            
-             
-            try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        
             
             thread.setPriority(2);
             thread.start();
