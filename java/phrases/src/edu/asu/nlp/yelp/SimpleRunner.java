@@ -107,7 +107,7 @@ public class SimpleRunner extends Thread {
 	                	newObject.put("is_tip", 0);
 //	                	System.out.println(newObject);
 	                	count ++;
-	                	if(count%100000 ==0){
+	                	if(count%5000 ==0){
 	                		System.out.println(Thread.currentThread().getName()+"_____"+count);
 	                	}
 	                	out.println(newObject);
