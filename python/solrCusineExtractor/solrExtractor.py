@@ -40,16 +40,17 @@ with open(json_file_name) as json_data:
                 try:
                     all_sentences = [sentence for sentence in review_text.lower()
                                      .split('.') if food_name in sentence]
-                    polarity_sum = 0
+                    max_polarity = 0
                     for sentence in all_sentences:
                         blob = TextBlob(sentence)
                         #for sentence in blob.sentences:
-                        polarity_Score = sentence.sentiment.polarity
-                        polarity_sum  = polarity_sum + polarity_Score
-                        
+                        polarity_Score = blob.sentiment.polarity
+                        if polarity_Score > max_polarity:
+                            max_polarity = polarity_Score
+                     
                     data = {}
                     data['item'] = food_name
-                    data['polarity_avg'] = polarity_sum / len(all_sentences)
+                    data['polarity'] = max_polarity
                     data['business_id'] = business_id
                     data['review_id'] = review_id
                     data['stars'] = stars
@@ -61,7 +62,8 @@ with open(json_file_name) as json_data:
                     json_data_out = json.dumps(data)
                     f.write(json_data_out+'\n')
                             
-                except:
+                except Exception as e:
+                    print(e)
                     pass
             
     f.close()
