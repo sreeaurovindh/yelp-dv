@@ -20,7 +20,7 @@ __Get all collection names in yelp:__
 http://localhost:5000/collections  
 
 __Get all data from the given collection:__  
-http://localhost:5000/collection/<coll\>
+http://localhost:5000/collection/<coll\>  
 http://localhost:5000/collection/dummy  
 
 __Get limited data from the given collection:__  
@@ -29,5 +29,5 @@ http://localhost:5000/collection/dummy/limit/50
 
 
 
-Info:
+__Info:__
 Refer [Introduction to MongoDB using Pymongo](http://altons.github.io/python/2013/01/21/gentle-introduction-to-mongodb-using-pymongo/) for using mongo calls in PyMongo.
