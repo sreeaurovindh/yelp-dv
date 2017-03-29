@@ -2,7 +2,7 @@
 
 ### Steps to configure:  
 * Install and setup __python3__, __virtualenv__ and __mongodb__ as prerequisite.  
-* Create a __test__ collection in mongodb for the yelp backend service to test for db connection. (one time)  
+* In mongodb, create an `yelp` database and __test__ collection for the yelp backend service to test for db connection. (one time)  
 * __virtualenv__ can be installed using `pip install virtualenv` (one time)  
 * Clone the repo  
 * Goto yelp/yelp-flask  
