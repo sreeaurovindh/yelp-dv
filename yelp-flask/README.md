@@ -20,11 +20,11 @@ __Get all collection names in yelp:__
 http://localhost:5000/collections  
 
 __Get all data from the given collection:__  
-http://localhost:5000/collection/\<coll\>  
+http://localhost:5000/collection/<coll\>
 http://localhost:5000/collection/dummy  
 
 __Get limited data from the given collection:__  
-http://localhost:5000/collection/\<coll\>/limit/\<limit\>  
+http://localhost:5000/collection/<coll\>/limit/\<limit\>  
 http://localhost:5000/collection/dummy/limit/50  
 
 
