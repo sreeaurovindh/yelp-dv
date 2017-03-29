@@ -9,6 +9,7 @@
 * Run `virtualenv env` (one time)  
 * Run `source env/bin/activate`. (Type `deactivate` for come out of the virtual envirionment)  
 * Run `pip install flask`  
+* Run `pip install Flask-PyMongo`
 * Start the service using `python app.py`  
 
 
