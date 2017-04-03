@@ -9,6 +9,5 @@ import scrapy
 
 
 class WikiItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+	cuisine = scrapy.Field()
+	foodItem = scrapy.Field()
