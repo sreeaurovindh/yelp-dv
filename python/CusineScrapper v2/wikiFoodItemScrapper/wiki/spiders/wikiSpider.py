@@ -50,7 +50,8 @@ class MySpider(scrapy.Spider):
                 self.log('Item ' + str(i) + "::" + cuisine +' : ' + str(item.encode('utf-8')))
 
                 regMatch = re.match('[A-Za-z0-9 ]+',item)
-                if(self.is_ascii(item) and regMatch and item.strip):
+                strippedItem = item.strip()
+                if(self.is_ascii(item) and regMatch and strippedItem and not strippedItem.isdigit()):
                     yield WikiItem (cuisine = cuisine, foodItem = item)
                 else:
                     self.log('Not a valid item : ' + item)
