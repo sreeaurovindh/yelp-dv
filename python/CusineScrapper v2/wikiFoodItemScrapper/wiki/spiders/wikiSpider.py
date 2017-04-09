@@ -18,6 +18,9 @@ class MySpider(scrapy.Spider):
     cuisineFile = open('../wikiCuisineLinkExtractor/urlFileRefine.txt','r')
     start_urls = [line.strip('\n') for line in cuisineFile]
 
+    cuisineNamesFile = open('../wikiCuisineLinkExtractor/cuisine.txt','r')
+    cuisineNamesList = [line.strip('\n') for line in cuisineNamesFile]
+
     def parse(self, response):
 
         #to debug values on first run
@@ -51,10 +54,22 @@ class MySpider(scrapy.Spider):
 
                 regMatch = re.match('[A-Za-z0-9 ]+',item)
                 strippedItem = item.strip()
-                if(self.is_ascii(item) and regMatch and strippedItem and not strippedItem.isdigit()):
-                    yield WikiItem (cuisine = cuisine, foodItem = item)
+                self.cuisineNameCount = len(self.cuisineNamesList)
+                
+                if(self.is_ascii(item) and regMatch and strippedItem and not strippedItem.isdigit()):                    
+                    yield self.matchCuisine(cuisine, item)
                 else:
                     self.log('Not a valid item : ' + item)
+
+    def matchCuisine(self, cuisine, item):
+        countBuffer = 0
+        for word in map(str.lower, self.cuisineNamesList):
+            cuisine_lower = cuisine.lower()
+            if word in cuisine_lower:
+                return WikiItem(cuisine=word, foodItem=item)
+            countBuffer += 1
+            if countBuffer >= self.cuisineNameCount - 1:
+                print '###### Not a predefined cuisine:' + cuisine_lower + ':'
 
     def getCuisine(self, url):
         regMatch = re.match('List_of_(\w+)_dishes', url)
