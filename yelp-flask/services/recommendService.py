@@ -59,7 +59,7 @@ def recommend_restaurant(user_id, business_id):
       user_name_list = []
       for val in  user_list_final:
         user_name_list.append(friendlist_dict[val])
-      output_list.append([businessiter['business_id'], user_name_list])
+      output_list.append([businessiter['name'], user_name_list])
     return output_list
   else:
     print("No food user!")
