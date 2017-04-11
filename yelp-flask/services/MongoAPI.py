@@ -2,11 +2,12 @@ from flask import Blueprint
 from flask import jsonify
 from flask import request
 from db.Mongo import mongo
+from services import recommendService as recommend
 
 mongo_api = Blueprint('mongo_api', __name__)
 
 @mongo_api.route("/collections")
-def getData():
+def get_data():
   try:
     collections = mongo.db.collection_names()
     return jsonify({'collections' : collections})
@@ -25,16 +26,15 @@ def get_data_from_collection(coll, limit=""):
   except Exception as err:
     return jsonify({'error' : "Something went wrong! "+ str(err)})
 
+@mongo_api.route("/recommendrestaurants/businessid/<businessid>/userid/<userid>", methods=['GET'])
+def recommend_restaurants(businessid, userid):
+  try:
+    res = recommend.recommend_restaurant(userid, businessid)
+    return jsonify({'data' : res})
+  except Exception as err:
+    return jsonify({'error' : "Something went wrong! "+ str(err)})
 
 # -------dummy database calls--------- #
-@mongo_api.route('/star', methods=['GET'])
-def get_all_stars():
-  star = mongo.db.stars
-  output = []
-  for s in star.find():
-    output.append({'name' : s['name'], 'distance' : s['distance']})
-  return jsonify({'result' : output})
-
 @mongo_api.route('/star', methods=['POST'])
 def add_star():
   star = mongo.db.stars
