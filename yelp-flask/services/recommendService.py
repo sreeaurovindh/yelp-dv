@@ -12,7 +12,7 @@ def recommend_restaurant(user_id, business_id):
   user_id_list.add(user_id)
 
   # get details of the particular user_id to find his friendlist
-  fooduser = list(mongo.db['fooduser'].find({ 'user_id' : user_id }, { "_id" : 0, 'user_id' : 1, 'friends' : { '$slice' : 20 }}))
+  fooduser = list(mongo.db['fooduser'].find({ 'user_id' : user_id }, { "_id" : 0, 'user_id' : 1, 'friends' : { '$slice' : 40 }}))
  
   if len(fooduser) > 0:
 
