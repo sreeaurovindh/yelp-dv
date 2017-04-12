@@ -11,32 +11,32 @@ function initMap() {
   });
 }
 
-var getBusinessData = function(location_type, location){
+var getBusinessData = function (location_type, location) {
   $.ajax({
-      type: "GET",
-      url: baseurl + "/getdata/business/locationtype/"+location_type+"/location/"+location,
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: showOnMap,
-      error: function (xhr, textStatus, errorMessage) {
-          console.log(errorMessage);
-      } 
+    type: "GET",
+    url: baseurl + "/getdata/business/locationtype/" + location_type + "/location/" + location,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: showOnMap,
+    error: function (xhr, textStatus, errorMessage) {
+      console.log(errorMessage);
+    }
   });
 }
 
-var showOnMap = function(result){
+var showOnMap = function (result) {
   var data = result['data'];
 
   infowindow = new google.maps.InfoWindow();
 
-  var markers = data.map(function(business, i) {
-    var marker =  new google.maps.Marker({
+  var markers = data.map(function (business, i) {
+    var marker = new google.maps.Marker({
       position: business['location'],
       label: business['name'].charAt(0)
     });
 
-    marker.addListener('click', function() {
-      infowindow.setContent('<div><b>'+business['name']+'</b></div><div>'+business['address']+'</div><div>Rating: '+business['stars']+' stars</div>');
+    marker.addListener('click', function () {
+      infowindow.setContent('<div><b>' + business['name'] + '</b></div><div>' + business['address'] + '</div><div>Rating: ' + business['stars'] + ' stars</div>');
       infowindow.open(map, marker);
     });
 
@@ -44,7 +44,7 @@ var showOnMap = function(result){
   });
 
   var markerCluster = new MarkerClusterer(map, markers,
-    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 }
 
 
