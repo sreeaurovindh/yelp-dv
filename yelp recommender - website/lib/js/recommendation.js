@@ -1,6 +1,5 @@
 var renderData = function(result){
     var data = result['data'];
-
     // transform the data into a useful representation
     // 1 is inner, 2, is outer
 
@@ -8,7 +7,6 @@ var renderData = function(result){
     //
     // inner: 
     // links: { inner: outer: }
-
 
     var outer = d3.map();
     var inner = [];
@@ -129,7 +127,7 @@ var renderData = function(result){
         len = Math.floor(len);
         //var c = Math.floor((Math.random() * 10));
         if (len > 5)
-            len = 5;	// fallback color
+            len = 4;	// fallback color
         
         return colors[len];
     }
@@ -155,14 +153,14 @@ var renderData = function(result){
     var svg = d3.select("#recommendation-chart").append("svg")
         .attr("width", diameter)
         .attr("height", diameter)
-    .append("g")
+        .append("g")
         .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
         
 
     // links
     var link = svg.append('g').attr('class', 'links').selectAll(".link")
         .data(data.links)
-    .enter().append('path')
+        .enter().append('path')
         .attr('class', 'link')
         .attr('id', function(d) { return d.id })
         .attr("d", diagonal)
@@ -174,7 +172,7 @@ var renderData = function(result){
 
     var onode = svg.append('g').selectAll(".recommend_outer_node")
         .data(data.outer)
-    .enter().append("g")
+        .enter().append("g")
         .attr("class", "recommend_outer_node")
         .attr("transform", function(d) { return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")"; })
         .on("mouseover", mouseover)
@@ -199,7 +197,7 @@ var renderData = function(result){
     
     var inode = svg.append('g').selectAll(".recommend_inner_node")
         .data(data.inner)
-    .enter().append("g")
+        .enter().append("g")
         .attr("class", "recommend_inner_node")
         .attr("transform", function(d, i) { return "translate(" + d.x + "," + d.y + ")"})
         .on("mouseover", mouseover)
@@ -260,4 +258,3 @@ $.ajax({
         console.log(errorMessage);
     } 
 });
-
