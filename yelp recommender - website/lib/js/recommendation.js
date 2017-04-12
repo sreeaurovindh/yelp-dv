@@ -72,7 +72,7 @@ var renderData = function (result) {
             data.outer[i1++] = outer[i];
     }
 
-    console.log(data.outer.reduce(function (a, b) { return a + b.related_links.length; }, 0) / data.outer.length);
+    //console.log(data.outer.reduce(function (a, b) { return a + b.related_links.length; }, 0) / data.outer.length);
 
 
     // from d3 colorbrewer: 
@@ -248,13 +248,20 @@ var renderData = function (result) {
     }
 }
 
-$.ajax({
-    type: "GET",
-    url: baseurl + "/getdata/recommendrestaurants/businessid/Ona9aVr6RJRL3xyPNlKSPA/userid/h9RUaaHa5kcQKqtJ-sgS0Q",
-    contentType: "application/json; charset=utf-8",
-    dataType: "json",
-    success: renderData,
-    error: function (xhr, textStatus, errorMessage) {
-        console.log(errorMessage);
-    }
-});
+var populateRestaurantRecommendation = function (businessid, userid) {
+    $.ajax({
+        type: "GET",
+        url: baseurl + "/getdata/recommendrestaurants/businessid/" + businessid + "/userid/" + userid,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(response){
+            d3.select("#recommendation-chart").html("")
+            if(response['data'].length > 0){
+                renderData(response);
+            }
+        },
+        error: function (xhr, textStatus, errorMessage) {
+            console.log(errorMessage);
+        }
+    });
+}

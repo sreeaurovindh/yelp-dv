@@ -24,8 +24,8 @@ var getBusinessData = function (location_type, location) {
   });
 }
 
-var showOnMap = function (result) {
-  var data = result['data'];
+var showOnMap = function (response) {
+  var data = response['data'];
 
   infowindow = new google.maps.InfoWindow();
 
@@ -36,8 +36,9 @@ var showOnMap = function (result) {
     });
 
     marker.addListener('click', function () {
-      infowindow.setContent('<div><b>' + business['name'] + '</b></div><div>' + business['address'] + '</div><div>Rating: ' + business['stars'] + ' stars</div>');
+      infowindow.setContent('<div><b>' + business['name'] + '</b></div><div>' + business['address'] + '</div><div>Rating: <b>' + business['stars'] + '</b> stars</div>');
       infowindow.open(map, marker);
+      getUserListForBusiness(business['business_id']);
     });
 
     return marker;
@@ -47,4 +48,29 @@ var showOnMap = function (result) {
     { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
 }
 
+var getUserListForBusiness = function (businessid) {
+  $.ajax({
+    type: "GET",
+    url: baseurl + "/getdata/userlistbybusinessid/" + businessid,
+    contentType: "application/json; charset=utf-8",
+    dataType: "json",
+    success: function(response) {
+      populateUserList(response, businessid);
+    },
+    error: function (xhr, textStatus, errorMessage) {
+      console.log(errorMessage);
+    }
+  });
+}
+
+var populateUserList = function (response, businessid) {
+  var data = response['data'];
+  var content = "";
+  for (user in data) {
+    content += '<a href="#"><div style="padding-left: 40px; font-size: larger; font-weight: bold;" '
+    +'onclick="populateRestaurantRecommendation(\''+businessid+'\',\''+ data[user]['user_id'] + '\')">' + data[user]['name'] + '</div></a><hr>'
+  }
+
+  $('.review-user-list').html(content);
+}
 

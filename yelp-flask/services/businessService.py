@@ -1,4 +1,5 @@
 from db.Mongo import mongo
+from operator import itemgetter
 
 def get_business_details_by_location(location_type, location):
   query = {}
@@ -28,3 +29,27 @@ def get_business_details_by_location(location_type, location):
     business.pop('longitude', None)
 
   return business_list
+
+
+def user_list_by_businessid(business_id):
+  query = { 'business_id' : business_id }
+  review_limit = 100
+  number_of_users = 10
+  user_mapping = {}
+
+  review_list = list(mongo.db['foodreviews']
+  .find( query, { "_id" : 0, 'user_id' : 1})
+  .limit(review_limit))
+
+  for review in review_list:
+    if review['user_id'] in user_mapping:
+      user_mapping[review['user_id']] += 1
+    else:
+      user_mapping[review['user_id']] = 1
+
+  user_mapping = sorted(user_mapping.items(), key=itemgetter(1), reverse=True)[:number_of_users]
+  user_mapping = [x[0] for x in user_mapping]
+
+  user_list = list(mongo.db['fooduser'].find( { 'user_id' : {'$in': user_mapping}}, { "_id" : 0, 'user_id' : 1, 'name' : 1}))
+
+  return user_list

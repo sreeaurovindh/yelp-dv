@@ -53,6 +53,14 @@ def get_restaurant_details(locationtype, location):
   except Exception as err:
     return jsonify({'error' : "Something went wrong! "+ str(err)})
 
+@mongo_api.route("/userlistbybusinessid/<business_id>", methods=['GET'])
+def user_list_by_businessid(business_id):
+  try:
+    res = business.user_list_by_businessid(business_id)
+    return jsonify({'data' : res})
+  except Exception as err:
+    return jsonify({'error' : "Something went wrong! "+ str(err)})
+
 # -------dummy database calls--------- #
 @mongo_api.route('/star', methods=['POST'])
 def add_star():
