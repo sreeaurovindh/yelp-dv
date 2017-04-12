@@ -1,4 +1,5 @@
 var map;
+var infowindow;
 
 function initMap() {
   var us_location = { lat: 38.967714, lng: -103.104248 };
@@ -13,7 +14,7 @@ function initMap() {
 var getBusinessData = function(location_type, location){
   $.ajax({
       type: "GET",
-      url: "http://localhost/getdata/business/locationtype/"+location_type+"/location/"+location,
+      url: baseurl + "/getdata/business/locationtype/"+location_type+"/location/"+location,
       contentType: "application/json; charset=utf-8",
       dataType: "json",
       success: showOnMap,
@@ -24,18 +25,26 @@ var getBusinessData = function(location_type, location){
 }
 
 var showOnMap = function(result){
-    var data = result['data'];
-    console.log(data);
+  var data = result['data'];
 
-    var markers = data.map(function(business, i) {
-      return new google.maps.Marker({
-        position: business['location'],
-        label: business['name'].charAt(0)
-      });
+  infowindow = new google.maps.InfoWindow();
+
+  var markers = data.map(function(business, i) {
+    var marker =  new google.maps.Marker({
+      position: business['location'],
+      label: business['name'].charAt(0)
     });
 
-    var markerCluster = new MarkerClusterer(map, markers,
-      {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+    marker.addListener('click', function() {
+      infowindow.setContent('<div><b>'+business['name']+'</b></div><div>'+business['address']+'</div><div>Rating: '+business['stars']+' stars</div>');
+      infowindow.open(map, marker);
+    });
+
+    return marker;
+  });
+
+  var markerCluster = new MarkerClusterer(map, markers,
+    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 }
 
 

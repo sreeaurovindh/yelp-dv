@@ -250,7 +250,7 @@ var renderData = function(result){
 
 $.ajax({
     type: "GET",
-    url: "http://localhost/getdata/recommendrestaurants/businessid/Ona9aVr6RJRL3xyPNlKSPA/userid/h9RUaaHa5kcQKqtJ-sgS0Q",
+    url: baseurl + "/getdata/recommendrestaurants/businessid/Ona9aVr6RJRL3xyPNlKSPA/userid/h9RUaaHa5kcQKqtJ-sgS0Q",
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: renderData,
