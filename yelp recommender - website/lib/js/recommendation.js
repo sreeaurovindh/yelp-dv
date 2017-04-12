@@ -1,6 +1,4 @@
 var renderData = function(result){
-    //var data = [[170, ["Ajay", "Alankrit"]], [160, ["Ajay", "Varuni", "Sree"]], [170, ["Varuni", "Sree", "Ajay"]], [130, [ "Varuni", "Ross", "Alankrit"]], [160, [ "Isaac", "Sree", "Ajay"]], [150, [ "Varuni", "Newton", "Alankrit"]], [170, [ "Ross", "Alankrit", "Varuni", "Ajay"]], [150, [ "Alankrit", "Newton"]], [190, [ "Isaac", "Sree"]], [200, ["Alankrit", "Isaac", "Varuni", "Sree", "Ross"]], [150, ["Newton", "Varuni"]], [180, ["Varuni", "Newton"]]];
-    console.log(result);
     var data = result['data'];
 
     // transform the data into a useful representation
@@ -83,7 +81,7 @@ var renderData = function(result){
 
     // from d3 colorbrewer: 
     // This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
-    var colors = ["#a50026","#d73027","#f46d43","#fdae61","#fee090","#ffffbf","#e0f3f8","#abd9e9","#74add1","#4575b4","#313695"]
+    var colors = ["#d7191c","#fdae61","#ffffbf","#a6d96a","#1a9641"];
     var color = d3.scale.linear()
         .domain([60, 220])
         .range([colors.length-1, 0])
@@ -126,13 +124,14 @@ var renderData = function(result){
     });
 
 
-    function get_color(name)
+    function get_color(len)
     {
-        var c = Math.floor((Math.random() * 10));
-        if (isNaN(c))
-            return '#dddddd';	// fallback color
+        len = Math.floor(len);
+        //var c = Math.floor((Math.random() * 10));
+        if (len > 5)
+            len = 5;	// fallback color
         
-        return colors[c];
+        return colors[len];
     }
 
     // Can't just use d3.svg.diagonal because one edge is in normal space, the
@@ -167,7 +166,8 @@ var renderData = function(result){
         .attr('class', 'link')
         .attr('id', function(d) { return d.id })
         .attr("d", diagonal)
-        .attr('stroke', function(d) { return get_color(d.inner.name); })
+        //.attr('stroke', function(d) { return get_color(d.inner.name); })
+        .attr('stroke', function(d) { return get_color(d.inner.related_links.length); })
         .attr('stroke-width', link_width);
 
     // outer nodes
@@ -209,7 +209,8 @@ var renderData = function(result){
         .attr('width', rect_width)
         .attr('height', rect_height)
         .attr('id', function(d) { return d.id; })
-        .attr('fill', function(d) { return get_color(d.name); });
+        //.attr('fill', function(d) { return get_color(d.name); });
+        .attr('fill', function(d) { return get_color(d.related_links.length); });
     
     inode.append("text")
         .attr('id', function(d) { return d.id + '-txt'; })
