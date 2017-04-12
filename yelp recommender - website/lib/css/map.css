@@ -1,0 +1,9 @@
+#map {
+  width: 100%;
+  height: 400px;
+  background-color: grey;
+}
+.world-map-header {
+  position: absolute;
+  z-index: 1;
+}
