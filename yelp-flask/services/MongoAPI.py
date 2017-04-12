@@ -3,6 +3,7 @@ from flask import jsonify
 from flask import request
 from db.Mongo import mongo
 from services import recommendService as recommend
+from services import commonAttributes
 from services import businessService as business
 
 mongo_api = Blueprint('mongo_api', __name__)
@@ -35,6 +36,15 @@ def recommend_restaurants(businessid, userid):
   except Exception as err:
     return jsonify({'error' : "Something went wrong! "+ str(err)})
 
+#Gets the top 5 most common attributes between the target business_id and
+#  other business_ids that are within the defined radius
+@mongo_api.route("/attributes/<business_id>/radius/<radius>", methods=['GET'])
+def get_common_attributes(business_id, radius):
+  try:
+    return commonAttributes.get_common_attributes(business_id, radius)
+  except Exception as err:
+    return jsonify({'error' : "Something went wrong! "+ str(err)})
+    
 @mongo_api.route("/business/locationtype/<locationtype>/location/<location>", methods=['GET'])
 def get_restaurant_details(locationtype, location):
   try:
