@@ -3,6 +3,7 @@ from flask import jsonify
 from flask import request
 from db.Mongo import mongo
 from services import recommendService as recommend
+from services import businessService as business
 
 mongo_api = Blueprint('mongo_api', __name__)
 
@@ -30,6 +31,14 @@ def get_data_from_collection(coll, limit=""):
 def recommend_restaurants(businessid, userid):
   try:
     res = recommend.recommend_restaurant(userid, businessid)
+    return jsonify({'data' : res})
+  except Exception as err:
+    return jsonify({'error' : "Something went wrong! "+ str(err)})
+
+@mongo_api.route("/business/locationtype/<locationtype>/location/<location>", methods=['GET'])
+def get_restaurant_details(locationtype, location):
+  try:
+    res = business.get_business_details_by_location(locationtype, location)
     return jsonify({'data' : res})
   except Exception as err:
     return jsonify({'error' : "Something went wrong! "+ str(err)})

@@ -1,4 +1,3 @@
-from flask import jsonify
 from db.Mongo import mongo
 from operator import itemgetter
 
