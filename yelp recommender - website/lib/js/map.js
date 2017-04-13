@@ -163,6 +163,7 @@ var showOnMap = function (response) {
       infowindow.setContent('<div><b>' + business['name'] + '</b></div><div>' + business['address'] + '</div><div>Rating: <b>' + business['stars'] + '</b> stars</div>');
       infowindow.open(map, marker);
       getUserListForBusiness(business['business_id']);
+      fetchAttributes(business['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
     });
 
     return marker;

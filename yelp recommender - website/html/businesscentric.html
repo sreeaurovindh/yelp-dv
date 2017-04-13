@@ -1,127 +1,136 @@
+<head>
+  <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+
+
+
+  <style>
+    #radiusSlider .slider-selection {
+      background: #BABABA;
+    }
+  </style>
+</head>
+
 <!-- Contains the content of the page -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <a data-toggle="collapse" href="#businessCentricView">
-  <section class="content-header">
-    
-    <h1 class="bg-blue-gradient dashboard-header">
-      Business Centric
-      <small style="color: black;">Visualization</small>
-    </h1>
-    <ol class="breadcrumb dashboard-header-arrow">
-      <i class="fa fa-chevron-down" aria-hidden="true"></i>
-    </ol>
-    <!--<ol class="breadcrumb">
+    <section class="content-header">
+
+      <h1 class="bg-blue-gradient dashboard-header">
+        Business Centric
+        <small style="color: black;">Visualization</small>
+      </h1>
+      <ol class="breadcrumb dashboard-header-arrow">
+        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+      </ol>
+      <!--<ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
       <button data-toggle="collapse" data-target="#abc">Collapsible</button>
       <li class="active">Dashboard</li>
     </ol>-->
-    
-  </section>
+
+    </section>
   </a>
 
   <!-- Main content -->
   <div>
-  <div id="businessCentricView" class="content collapse in">
-    <!-- Main row -->
-    <div class="row">
-      <!-- Left col -->
-      <section class="col-lg-7 connectedSortable">
-        <!-- Sunburst box -->
-        <div class="box box-danger">
-          <div class="box-header">
-            <h3 class="box-title">Sunburst</h3>
-          </div>
-          
-          <div class="box-footer">
-            <div class="input-group">
-              
-              
+    <div id="businessCentricView" class="content collapse in">
+      <!-- Main row -->
+      <div class="row">
+
+        <!-- Left col -->
+        <section class="col-lg-7 connectedSortable">
+
+          <div class="box box-primary center-block">
+            <div class="box-header">
+              <h3 class="box-title">Radius :</h3>
+              <input id="radius" data-slider-id='radiusSlider' type="text" data-slider-min="0.1" data-slider-max="20" data-slider-step=".1"
+                data-slider-value="1.5" />
             </div>
           </div>
-        </div><!-- /.box (sunburst box) -->
 
-        <!-- solid sales graph -->
-        <div class="box box-solid bg-teal-gradient">
-          <div class="box-header">
-            <i class="fa fa-th"></i>
-            <h3 class="box-title">Friend Recommendation</h3>
-            <div class="box-tools pull-right">
-              <button class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-              <button class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
+          <div class="box box-danger">
+            <div class="box-header">
+              <h3 class="box-title">Stacked Bar Chart</h3>
+            </div>
+            <div class="box-footer">
+              <div class="input-group">
+                <!--Fill your viz somewhere here-->
+              </div>
             </div>
           </div>
-          <div class="box-body border-radius-none">
-            <div class="chart" id="line-chart" style="height: 250px;"></div>
-          </div><!-- /.box-body -->
-          
-        </div><!-- /.box -->
 
-        <!-- TO DO List -->
-        <div class="box box-primary">
-          <div class="box-header">
-            <h3 class="box-title">Need to decide</h3>
-            <div class="box-tools pull-right">
-              
+          <div class="box box-solid bg-teal-gradient">
+            <div class="box-header">
+              <i id="prlplotTrigger" class="fa fa-th"></i>
+              <h3 class="box-title">Comparing attributes against neighbors</h3>
+              <div class="box-tools pull-right">
+                <button id="downloadImage" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-chevron-down"></i></button>
+              </div>
             </div>
-          </div><!-- /.box-header -->
-
-        </div><!-- /.box -->
-
-      </section><!-- /.Left col -->
-      <!-- right col (We are only adding the ID to make the widgets sortable)-->
-      <section class="col-lg-5 connectedSortable">
-
-        <!-- Map box -->
-        <div class="box box-solid bg-light-blue-gradient">
-          <div class="box-header">
-            <!-- tools box -->
-            <div class="pull-right box-tools">
-              <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
-              <button class="btn btn-primary btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
-            </div><!-- /. tools -->
-
-            <i class="fa fa-map-marker"></i>
-            <h3 class="box-title">
-              Map
-            </h3>
-          </div>
-          <div class="box-body">
-            <div id="world-map" style="height: 250px; width: 100%;"></div>
-          </div><!-- /.box-body-->
-          <div class="box-footer no-border">
-            <div class="row">
-              <div class="col-xs-6 text-center" style="border-right: 1px solid #f4f4f4">
-                <div id="sparkline-1"></div>
-                <div class="knob-label">Restaurants</div>
-              </div><!-- ./col -->
-              <div class="col-xs-6 text-center">
-                <div id="sparkline-2"></div>
-                <div class="knob-label">Cuisines</div>
-              </div><!-- ./col -->
-            </div><!-- /.row -->
-          </div>
-        </div>
-        <!-- /.box -->
-
-        <!-- Friend Recommender box -->
-        <div class="box box-success">
-          <div class="box-header">
-            <i class="ion ion-clipboard"></i>
-            <h3 class="box-title">List</h3>
-          </div>
-          
-          <div class="box-footer">
-            <div class="input-group">
-              
-              
+            <div class="box-body border-radius-none">
+              <div class="chart" id="parallelcoord" style="height: 250px;"></div>
             </div>
+
           </div>
-        </div><!-- /.box (Friend Recommender box) -->
 
-      </section><!-- right col -->
-    </div><!-- /.row (main row) -->
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <section class="col-lg-5 connectedSortable">
 
-  </div><!-- /.content -->
+          <!-- Map box -->
+          <div class="box box-solid bg-light-blue-gradient">
+            <div class="box-header">
+              <!-- tools box -->
+              <div class="pull-right box-tools">
+                <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
+                <button class="btn btn-primary btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
+              </div>
+              <!-- /. tools -->
+
+              <i class="fa fa-map-marker"></i>
+              <h3 class="box-title">
+                Map
+              </h3>
+            </div>
+            <div class="box-body">
+              <div id="world-map" style="height: 250px; width: 100%;"></div>
+            </div>
+
+          </div>
+          <!-- /.box -->
+
+        </section>
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+
+    </div>
+    <!-- /.content -->
   </div>
-</div><!-- /.content-wrapper -->
+</div>
+<!-- /.content-wrapper -->
+
+<script type='text/javascript'>
+  var biz_radius_slider;
+
+  $(document).ready(function () {
+    biz_radius_slider = $("#radius").bootstrapSlider();
+    biz_radius_slider.bootstrapSlider({
+      formatter: function (value) {
+        return 'Current value: ' + value;
+      }
+    });
+
+    //Thats how you read
+    //console.log(biz_radius_slider.bootstrapSlider('getValue'))
+
+    //Thats how you write
+    //biz_radius_slider.bootstrapSlider('setValue', 4)
+  });
+
+  $(function () {
+    $("#parallelcoord").load("html/parallelcoord.html");
+  });
+</script>
