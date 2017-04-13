@@ -10,13 +10,11 @@
 <script src="../lib/js/d3.svg.multibrush.js"></script>
 <script src="../lib/js/d3.parcoords.js"></script>
 <!--<div id="example" class="parcoords" style="width:960px;height:200px;"></div>-->
-<p><a href="../data/attributes.csv">csv file</a></p>
 
 <div id="yelpPC" class="parcoords"></div>
-<button onclick="downloadScreenshot()">Download screenshot</button>
-<p></p>
+
 <script>
-  var factor = .5;
+  var factor = .25;
   var height = 480 * factor;
   var width = 640 * 2 * factor;
 
@@ -28,15 +26,24 @@
 
   d3.csv('../data/attributes.csv', function(data) {
 
-  console.log(Object.keys(data[0]));
+  objectKeys = Object.keys(data[0]);
+  primaryAttr = objectKeys[0];
+  console.log(primaryAttr);
 
   //Create the Scale we will use for the Axis
   var axisScale = d3.scale.linear()
                            .domain([1, 0])
                            .range([0, height - 35]);
-
+  
+  //Axis for name column
   var axisScaleName = d3.scale.ordinal()
                           .range([0, height - 35]);                         
+
+  // linear color scale
+  var colorScale = d3.scale.linear()
+    .domain([0, 1])
+    .range(["red", "lime"])
+    .interpolate(d3.interpolateLab);
 
   yelpcoord
     .width(width)
@@ -45,7 +52,7 @@
       {
         'Restaurant':
           {
-            title: "Restaurant",
+            title: primaryAttr,
             orient: 'left',
             type: 'string',
             tickPadding: 5,
@@ -54,24 +61,19 @@
             index:0
           },
         'Ambience': {type:'number',
-          //tickValues:[0.25,.5,.75,1],
           yscale:axisScale
           },
         'Food': {type:'number',
-          //tickValues:[0.25,.5,.75,1],
           yscale:axisScale
           },
         'Service': {type:'number',
-          //tickValues:[0.25,.5,.75,1],
           yscale:axisScale
           },
         'Neighborhood': {type:'number',
-          //tickValues:[0.25,.5,.75,1],
           yscale:axisScale
           },
         'Average': {type:'number',
           index:0,
-          //tickValues:[0.25,.5,.75,1],
           yscale:axisScale
           }
         })
@@ -82,6 +84,7 @@
     .alpha(.6)
     .alphaOnBrushed(0.33)
     .mode("queue")
+    .rate(1)
     .render()
     .margin({top: 25, left:30, right: 0, bottom: 10})
     .reorderable()
@@ -99,16 +102,9 @@
     .style("font", "12px sans-serif")
     .style("font-weight","bold");
   });
-
-    // linear color scale
-    var colorScale = d3.scale.linear()
-      .domain([0, 1])
-      .range(["red", "lime"])
-      .interpolate(d3.interpolateLab);
-
     
-
-    function downloadScreenshot() {
+  //Download the sttribute comparision image
+  function downloadScreenshot() {
 
       var callback = function (canvas) {
           // Download the image
@@ -119,4 +115,9 @@
       };
       yelpcoord.mergeParcoords(callback);
   }
+
+  //Download on button click
+  downloadButton = document.getElementById("downloadImage");
+  if(downloadButton)
+    downloadButton.onclick = downloadScreenshot;
 </script>
