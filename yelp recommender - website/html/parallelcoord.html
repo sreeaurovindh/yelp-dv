@@ -2,19 +2,26 @@
 <head>
   <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
   <meta content="utf-8" http-equiv="encoding">
+
+  <style>
+      #ex1Slider .slider-selection {
+          background: #BABABA;
+      }
+  </style>
+  <link rel="stylesheet" type="text/css" href="../lib/css/d3.parcoords.css">
+  <link rel="stylesheet" type="text/css" href="../lib/css/style.css">
+  <script src="../lib/js/d3.js"></script>
+  <script src="../lib/js/d3.svg.multibrush.js"></script>
+  <script src="../lib/js/d3.parcoords.js"></script>
+  <title>Yelp Attributes Visualiser</title>
 </head>
-<title>Yelp Attributes Visualiser</title>
-<link rel="stylesheet" type="text/css" href="../lib/css/d3.parcoords.css">
-<link rel="stylesheet" type="text/css" href="../lib/css/style.css">
-<script src="../lib/js/d3.js"></script>
-<script src="../lib/js/d3.svg.multibrush.js"></script>
-<script src="../lib/js/d3.parcoords.js"></script>
-<!--<div id="example" class="parcoords" style="width:960px;height:200px;"></div>-->
+<body>
+  
 
 <div id="yelpPC" class="parcoords"></div>
 
 <script>
-  var factor = .25;
+  var factor = .75;
   var height = 480 * factor;
   var width = 640 * 2 * factor;
 
@@ -78,7 +85,7 @@
           }
         })
     .data(data)
-    .color(function(d) {return colorScale(d['Average']); })
+    .color(function(d) {return colorScale(d[objectKeys[6]]); })
     .animationTime(1000)
     .data(data)
     .alpha(.6)
@@ -121,3 +128,4 @@
   if(downloadButton)
     downloadButton.onclick = downloadScreenshot;
 </script>
+</body>
