@@ -1,0 +1,122 @@
+<!doctype html>
+<head>
+  <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+  <meta content="utf-8" http-equiv="encoding">
+</head>
+<title>Yelp Attributes Visualiser</title>
+<link rel="stylesheet" type="text/css" href="../lib/css/d3.parcoords.css">
+<link rel="stylesheet" type="text/css" href="../lib/css/style.css">
+<script src="../lib/js/d3.js"></script>
+<script src="../lib/js/d3.svg.multibrush.js"></script>
+<script src="../lib/js/d3.parcoords.js"></script>
+<!--<div id="example" class="parcoords" style="width:960px;height:200px;"></div>-->
+<p><a href="../data/attributes.csv">csv file</a></p>
+
+<div id="yelpPC" class="parcoords"></div>
+<button onclick="downloadScreenshot()">Download screenshot</button>
+<p></p>
+<script>
+  var factor = .5;
+  var height = 480 * factor;
+  var width = 640 * 2 * factor;
+
+  paraCoordElem = document.getElementById('yelpPC');
+  paraCoordElem.style.width = width + 'px';
+  paraCoordElem.style.height = height + 'px';
+
+  var yelpcoord = d3.parcoords()("#yelpPC");
+
+  d3.csv('../data/attributes.csv', function(data) {
+
+  console.log(Object.keys(data[0]));
+
+  //Create the Scale we will use for the Axis
+  var axisScale = d3.scale.linear()
+                           .domain([1, 0])
+                           .range([0, height - 35]);
+
+  var axisScaleName = d3.scale.ordinal()
+                          .range([0, height - 35]);                         
+
+  yelpcoord
+    .width(width)
+    .height(height)
+    .dimensions(
+      {
+        'Restaurant':
+          {
+            title: "Restaurant",
+            orient: 'left',
+            type: 'string',
+            tickPadding: 5,
+            innerTickSize: 10,
+            //yscale:axisScaleName,
+            index:0
+          },
+        'Ambience': {type:'number',
+          //tickValues:[0.25,.5,.75,1],
+          yscale:axisScale
+          },
+        'Food': {type:'number',
+          //tickValues:[0.25,.5,.75,1],
+          yscale:axisScale
+          },
+        'Service': {type:'number',
+          //tickValues:[0.25,.5,.75,1],
+          yscale:axisScale
+          },
+        'Neighborhood': {type:'number',
+          //tickValues:[0.25,.5,.75,1],
+          yscale:axisScale
+          },
+        'Average': {type:'number',
+          index:0,
+          //tickValues:[0.25,.5,.75,1],
+          yscale:axisScale
+          }
+        })
+    .data(data)
+    .color(function(d) {return colorScale(d['Average']); })
+    .animationTime(1000)
+    .data(data)
+    .alpha(.6)
+    .alphaOnBrushed(0.33)
+    .mode("queue")
+    .render()
+    .margin({top: 25, left:30, right: 0, bottom: 10})
+    .reorderable()
+    .brushMode("1D-axes-multi")
+    .brushedColor(
+      //"navy"
+      "#48A4FF"
+      );
+
+    yelpcoord.svg.selectAll("text")
+    .style("font", "9px sans-serif");
+
+    yelpcoord.svg.selectAll("text.label")
+    .attr("transform", "translate(0,-10)")
+    .style("font", "12px sans-serif")
+    .style("font-weight","bold");
+  });
+
+    // linear color scale
+    var colorScale = d3.scale.linear()
+      .domain([0, 1])
+      .range(["red", "lime"])
+      .interpolate(d3.interpolateLab);
+
+    
+
+    function downloadScreenshot() {
+
+      var callback = function (canvas) {
+          // Download the image
+          var download = document.createElement("a");
+          download.href = canvas.toDataURL("image/png");
+          download.download = "parallel-coordinate.png";
+          download.click();
+      };
+      yelpcoord.mergeParcoords(callback);
+  }
+</script>

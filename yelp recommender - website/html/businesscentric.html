@@ -30,7 +30,7 @@
         <!-- Sunburst box -->
         <div class="box box-danger">
           <div class="box-header">
-            <h3 class="box-title">Sunburst</h3>
+            <h3 class="box-title">Draught map</h3>
           </div>
           
           <div class="box-footer">
@@ -45,14 +45,14 @@
         <div class="box box-solid bg-teal-gradient">
           <div class="box-header">
             <i class="fa fa-th"></i>
-            <h3 class="box-title">Friend Recommendation</h3>
+            <h3 class="box-title">Comparing attributes against neighbors</h3>
             <div class="box-tools pull-right">
               <button class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
               <button class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
             </div>
           </div>
           <div class="box-body border-radius-none">
-            <div class="chart" id="line-chart" style="height: 250px;"></div>
+            <div class="chart" id="parallelcoord" style="height: 250px;"></div>
           </div><!-- /.box-body -->
           
         </div><!-- /.box -->
@@ -125,3 +125,9 @@
   </div><!-- /.content -->
   </div>
 </div><!-- /.content-wrapper -->
+
+<script> 
+      $(function(){
+        $("#parallelcoord").load("html/parallelcoord.html");
+      });
+</script>
