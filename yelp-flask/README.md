@@ -10,6 +10,7 @@
 * Run `source env/bin/activate`. (Type `deactivate` for come out of the virtual envirionment)  
 * Run `pip install flask`  
 * Run `pip install Flask-PyMongo`
+* Run `pip install -U flask-cors`
 * Start the service using `python app.py`  
 
 

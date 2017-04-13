@@ -1,8 +1,10 @@
 from flask import Flask
 from db.Mongo import mongo
 from services.MongoAPI import mongo_api
+from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
+CORS(app)
 
 # config details for mongodb
 app.config['MONGO_DBNAME'] = 'yelp'
