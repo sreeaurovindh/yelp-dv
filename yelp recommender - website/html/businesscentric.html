@@ -130,24 +130,6 @@
     //biz_radius_slider.bootstrapSlider('setValue', 4)
   });
 
-  var fetchAttributes = function (businessid, userid) {
-    $.ajax({
-        type: "GET",
-        url: baseurl + "/getdata/recommendrestaurants/businessid/" + businessid + "/userid/" + userid,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        success: function(response){
-            d3.select("#recommendation-chart").html("")
-            if(response['data'].length > 0){
-                renderData(response);
-            }
-        },
-        error: function (xhr, textStatus, errorMessage) {
-            console.log(errorMessage);
-        }
-    });
-  }
-
   $(function () {
     $("#parallelcoord").load("html/parallelcoord.html");
   });

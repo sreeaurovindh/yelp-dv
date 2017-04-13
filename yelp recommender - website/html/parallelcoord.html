@@ -32,13 +32,19 @@
     paraCoordElem.style.height = height + 'px';
 
     var paracoordOnTrigger = function (biz_Id) {
-
-      var yelpcoord = d3.parcoords()("#yelpPC");
       d3.csv('../data/attributes.csv', function (data) {
+        renderParaCoord(data);
+      });
+    };
+
+    var renderParaCoord = function (data) {
+        var yelpcoord = d3.parcoords()("#yelpPC");
+
+        console.log(data);
+        return;
 
         objectKeys = Object.keys(data[0]);
         primaryAttr = objectKeys[0];
-        console.log(biz_Id);
 
         //Create the Scale we will use for the Axis
         var axisScale = d3.scale.linear()
@@ -115,7 +121,6 @@
           .attr("transform", "translate(0,-10)")
           .style("font", "12px sans-serif")
           .style("font-weight", "bold");
-      });
     };
 
 
@@ -132,6 +137,37 @@
       yelpcoord.mergeParcoords(callback);
     }
 
+    var fetchAttributes = function (businessid, radius) {
+
+      if(businessid == null)
+      {
+        businessid = "Sq596PqWNj7J0s-YAQmrQA";
+        console.warn('Using sample biz_id = ' + businessid);
+      }
+
+      if(radius == null)
+      {
+        radius = 1;
+        console.warn('Using sample radius =' + radius);
+      }
+
+      if(window.jQuery)
+        $.ajax({
+            type: "GET",
+            url: /*baseurl*/ 'http://localhost:5000' + "/getdata/attributes/" + businessid + "/radius/" + radius,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(response){
+              renderParaCoord(response);
+            },
+            error: function (xhr, textStatus, errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+      else
+        console.error("No query without no jquery");
+    }
+
     if(window.jQuery)
       $( document ).ready(function() {
         //Download on button click
@@ -139,9 +175,11 @@
           if (downloadButton)
             downloadButton.onclick = downloadScreenshot;
           
-          $("#prlplotTrigger").click(function() { paracoordOnTrigger('b');});
+          $("#prlplotTrigger").click(function() { fetchAttributes(null, null);});
       });
     else
-      paracoordOnTrigger('a')
+      fetchAttributes(null, null)
+
+
   </script>
 </body>
