@@ -41,7 +41,7 @@ def recommend_restaurants(businessid, userid):
 @mongo_api.route("/attributes/<business_id>/radius/<radius>", methods=['GET'])
 def get_common_attributes(business_id, radius):
   try:
-    return commonAttributes.get_common_attributes(business_id, radius)
+    return commonAttributes.get_restaurant_attributes(business_id, radius)
   except Exception as err:
     return jsonify({'error' : "Something went wrong! "+ str(err)})
     
