@@ -14,6 +14,7 @@
   <script src="../lib/js/d3.js"></script>
   <script src="../lib/js/d3.svg.multibrush.js"></script>
   <script src="../lib/js/d3.parcoords.js"></script>
+  <script src="../plugins/jQuery/jQuery-2.1.3.min.js"></script>
   <title>Yelp Attributes Visualiser</title>
 </head>
 
@@ -177,7 +178,11 @@
           if (downloadButton)
             downloadButton.onclick = downloadScreenshot;
           
-          $("#prlplotTrigger").click(function() { fetchAttributes(null, null);});
+          var triggerElem = $("#prlplotTrigger")[0]
+          if(triggerElem != null)
+            triggerElem.click(function() { fetchAttributes(null, null);});
+          else
+              fetchAttributes(null, null);
       });
     else
       fetchAttributes(null, null)
