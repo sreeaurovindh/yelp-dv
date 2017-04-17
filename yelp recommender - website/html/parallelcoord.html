@@ -41,8 +41,6 @@
     var renderParaCoord = function (data) {
         var yelpcoord = d3.parcoords()("#yelpPC");
 
-        console.log(data);
-
         objectKeys = Object.keys(data[0]);
         primaryAttr = objectKeys[0];
 
@@ -66,7 +64,7 @@
           .height(height)
           .dimensions(
           {
-            'Restaurant':
+            [objectKeys[0]]:
             {
               title: "Restaurants",
               orient: 'left',
@@ -75,27 +73,28 @@
               innerTickSize: 10,
               index: 0
             },
-            'Ambience': {              
+            [objectKeys[1]]: {              
               type: 'number',
               yscale: axisScale
             },
-            'Food': {
+            [objectKeys[2]]: {
               type: 'number',
               yscale: axisScale
             },
-            'Service': {
+            [objectKeys[3]]: {
               type: 'number',
               yscale: axisScale
             },
-            'Neighborhood': {
+            [objectKeys[4]]: {
               type: 'number',
-              yscale: axisScale
-            },
-            'Average': {
-              type: 'number',
-              index: 0,
               yscale: axisScale
             }
+            // ,
+            // 'Average': {
+            //   type: 'number',
+            //   index: 0,
+            //   yscale: axisScale
+            // }
           })
           .data(data)
           .color(function (d) { return colorScale(d[objectKeys[6]]); })
