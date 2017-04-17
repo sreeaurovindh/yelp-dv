@@ -10,7 +10,7 @@ def get_restaurant_attributes(business_id, radius):
     nearby_restaurant_id_list = find_nearby_restaurants_id(business_id, radius, nearby_restaurant_limit)
 
     restaurant_names = get_business_names(nearby_restaurant_id_list)
-
+    
     top_attr_polarity_list = []
     top_attr_list = []
 
@@ -71,12 +71,22 @@ def find_nearby_restaurants_id(business_id, radius, limit):
     #radius/3959 will be search radius in radians
     neighbor_query_pipeline = [
         {'$match': {'loc': {'$geoWithin': {'$centerSphere' : [target_coords, float(radius)/3959 ]}}}},
+        {'$sort' : {'attribute_count':-1}},
         {'$limit': limit},
         {'$group': {'_id':1, 'businesses': {'$push' : '$business_id'}}}
         ]
     
     nearby_restaurant_id_mongo = mongo.db['food_business'].aggregate(neighbor_query_pipeline)
-    return list(nearby_restaurant_id_mongo)[0]['businesses']
+    nearby_restaurant_id_list = list(nearby_restaurant_id_mongo)[0]['businesses']
+
+    if business_id in nearby_restaurant_id_list:
+        idx = nearby_restaurant_id_list.index(business_id)
+        nearby_restaurant_id_list.insert(0, nearby_restaurant_id_list.pop(idx))
+    else:
+        nearby_restaurant_id_list.insert(0, business_id)
+        nearby_restaurant_id_list.pop(len(nearby_restaurant_id_list)-1)
+
+    return nearby_restaurant_id_list
 
 #Fetches the 50 most mentioned attributes from a restaurant
 def get_restaurant_top_attributes(business_id):
