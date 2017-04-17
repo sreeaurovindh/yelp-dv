@@ -27,6 +27,7 @@
     var factor = .75;
     var height = 480 * factor;
     var width = 640 * 2 * factor;
+    var yelpcoord;
 
     paraCoordElem = document.getElementById('yelpPC');
     paraCoordElem.style.width = width + 'px';
@@ -39,7 +40,8 @@
     };
 
     var renderParaCoord = function (data) {
-        var yelpcoord = d3.parcoords()("#yelpPC");
+        if(!yelpcoord)
+          yelpcoord = d3.parcoords()("#yelpPC");
 
         objectKeys = Object.keys(data[0]);
         primaryAttr = objectKeys[0];
@@ -176,7 +178,7 @@
 
     if(window.jQuery)
       $( document ).ready(function() {
-        //Download on button click
+          //Download on button click
           downloadButton = document.getElementById("downloadImage");
           if (downloadButton)
             downloadButton.onclick = downloadScreenshot;
@@ -188,8 +190,6 @@
               fetchAttributes(null, null);
       });
     else
-      fetchAttributes(null, null)
-
-
+      fetchAttributes(null, null);
   </script>
 </body>
