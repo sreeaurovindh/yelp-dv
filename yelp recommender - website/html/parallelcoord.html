@@ -55,7 +55,7 @@
 
         // linear color scale
         var colorScale = d3.scale.linear()
-          .domain([0, 1])
+          .domain([-1, 1])
           .range(["red", "lime"])
           .interpolate(d3.interpolateLab);
 
@@ -64,7 +64,7 @@
           .height(height)
           .dimensions(
           {
-            [objectKeys[0]]:
+            [objectKeys[objectKeys.length - 1]]:
             {
               title: "Restaurants",
               orient: 'left',
@@ -72,6 +72,16 @@
               tickPadding: 5,
               innerTickSize: 10,
               index: 0
+            },
+            [objectKeys[objectKeys.length - 2]]: {
+              title: "Average",
+              type: 'number',
+              index: 1,
+              yscale: axisScale
+            },
+            [objectKeys[0]]: {              
+              type: 'number',
+              yscale: axisScale
             },
             [objectKeys[1]]: {              
               type: 'number',
@@ -89,15 +99,9 @@
               type: 'number',
               yscale: axisScale
             }
-            // ,
-            // 'Average': {
-            //   type: 'number',
-            //   index: 0,
-            //   yscale: axisScale
-            // }
           })
           .data(data)
-          .color(function (d) { return colorScale(d[objectKeys[6]]); })
+          .color(function (d) { return colorScale(d[objectKeys[objectKeys.length -2]]); })
           .animationTime(1000)
           .data(data)
           .alpha(.6)
@@ -105,7 +109,7 @@
           .mode("queue")
           .rate(1)
           .render()
-          .margin({ top: 25, left: 30, right: 0, bottom: 10 })
+          .margin({ top: 25, left: 90, right: 0, bottom: 10 })
           .reorderable()
           .brushMode("1D-axes-multi")
           .brushedColor(

@@ -1,36 +1,6 @@
 from flask import jsonify
 from db.Mongo import mongo
 
-# Finds the business name for corresponding business Ids
-def get_business_names(nearby_restaurant_id_list):
-    restaurant_names = []
-
-    for biz_id in nearby_restaurant_id_list:
-        restaurant = mongo.db['food_business'].find_one({ 'business_id' : biz_id })
-        restaurant_names.append(restaurant['name'])
-
-    return restaurant_names
-
-#returns the list of all nearby restaurants within radius, capped by limit
-def find_nearby_restaurants_id(business_id, radius, limit):
-    location_query_pipeline = [
-    {'$match': {'business_id': 'Sq596PqWNj7J0s-YAQmrQA'}},
-    {'$project':{'_id':0,'loc':'$loc.coordinates'}}
-    ]
-
-    target_restaurant_location =  mongo.db['food_business'].aggregate(location_query_pipeline)
-    target_coords = list(target_restaurant_location)[0]['loc']
-
-    #radius/3959 will be search radius in radians
-    neighbor_query_pipeline = [
-        {'$match': {'loc': {'$geoWithin': {'$centerSphere' : [target_coords, float(radius)/3959 ]}}}},
-        {'$limit': limit},
-        {'$group': {'_id':1, 'businesses': {'$push' : '$business_id'}}}
-        ]
-    
-    nearby_restaurant_id_mongo = mongo.db['food_business'].aggregate(neighbor_query_pipeline)
-    return list(nearby_restaurant_id_mongo)[0]['businesses']
-
 #Gets the top N most common attributes between the target business_id and
 #  other business_ids that are within the defined radius
 def get_restaurant_attributes(business_id, radius):
@@ -77,6 +47,36 @@ def get_restaurant_attributes(business_id, radius):
         output_list.append(restaurant_dict)  
 
     return jsonify(output_list)
+
+# Finds the business name for corresponding business Ids
+def get_business_names(nearby_restaurant_id_list):
+    restaurant_names = []
+
+    for biz_id in nearby_restaurant_id_list:
+        restaurant = mongo.db['food_business'].find_one({ 'business_id' : biz_id })
+        restaurant_names.append(restaurant['name'])
+
+    return restaurant_names
+
+#returns the list of all nearby restaurants within radius, capped by limit
+def find_nearby_restaurants_id(business_id, radius, limit):
+    location_query_pipeline = [
+    {'$match': {'business_id': 'Sq596PqWNj7J0s-YAQmrQA'}},
+    {'$project':{'_id':0,'loc':'$loc.coordinates'}}
+    ]
+
+    target_restaurant_location =  mongo.db['food_business'].aggregate(location_query_pipeline)
+    target_coords = list(target_restaurant_location)[0]['loc']
+
+    #radius/3959 will be search radius in radians
+    neighbor_query_pipeline = [
+        {'$match': {'loc': {'$geoWithin': {'$centerSphere' : [target_coords, float(radius)/3959 ]}}}},
+        {'$limit': limit},
+        {'$group': {'_id':1, 'businesses': {'$push' : '$business_id'}}}
+        ]
+    
+    nearby_restaurant_id_mongo = mongo.db['food_business'].aggregate(neighbor_query_pipeline)
+    return list(nearby_restaurant_id_mongo)[0]['businesses']
 
 #Fetches the 50 most mentioned attributes from a restaurant
 def get_restaurant_top_attributes(business_id):
