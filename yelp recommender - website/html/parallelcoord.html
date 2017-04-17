@@ -177,8 +177,8 @@
           if (downloadButton)
             downloadButton.onclick = downloadScreenshot;
           
-          var triggerElem = $("#prlplotTrigger")[0]
-          if(triggerElem != null)
+          var triggerElem = $("#prlplotTrigger")
+          if(triggerElem[0] != null)
             triggerElem.click(function() { fetchAttributes(null, null);});
           else
               fetchAttributes(null, null);

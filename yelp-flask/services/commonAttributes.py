@@ -1,55 +1,5 @@
 from flask import jsonify
 from db.Mongo import mongo
-from bson.son import SON
-
-#Gets the top 5 most common attributes between the target business_id and
-#  other business_ids that are within the defined radius
-def get_common_attributes(business_id, radius):
-
-    maxItems = 5
-
-    targetRestaurantName = getBusinessName(business_id)
-
-    targetBusinessAttributes = mongo.db.eval("attrOfTargetBiz('"+business_id+"')")['_batch']
-    targetBusinessAttributes.sort(key=lambda x: x['count'], reverse=True)
-
-    neighboringAttributes = mongo.db.eval("attrOfNeighborBiz('"+business_id+"', '"+radius+"')")['_batch']
-    neighboringAttributes.sort(key=lambda x: x['count'], reverse=True)
-
-    targetAttr = [o['_id'] for o in targetBusinessAttributes]
-    neighborAttr = [o['_id'] for o in neighboringAttributes]
-
-    intersect = set(targetAttr) & set(neighborAttr)
-
-    #commonAttributes = [obj['_id'] for obj in neighboringAttributes if obj['_id'] in targetBusinessAttributes['_id']]
-
-    restaurantList
-
-    prllPlotData = []
-
-    itemCount = 0
-
-    for attr in intersect:
-        dataPoint = {}
-        for item in targetBusinessAttributes:
-            if(attr == item['_id']):
-                dataPoint['Restaurant'] = targetRestaurantName
-                dataPoint[attr] = item['polarity']
-        for item in neighboringAttributes:
-            if(attr == item['_id']):
-                dataPoint['Restaurant'] = 'Average'
-                dataPoint[attr] = item['polarity']
-                itemCount += 1
-
-        prllPlotData.append(dataPoint)
-        if itemCount >= maxItems :
-            break    
-
-    responseString = "" + str(prllPlotData)
-    # responseString += "::" + (neighboringAttributes[0]['_id'])
-    # responseString += "::" + (str(neighboringAttributes) + " ::::::::::" + str(targetBusinessAttributes))
-
-    return jsonify({'targetBusiness' : business_id, 'radius': radius,'data': responseString})
 
 # Finds the business name for corresponding business Ids
 def get_business_names(nearby_restaurant_id_list):
@@ -112,14 +62,18 @@ def get_restaurant_attributes(business_id, radius):
 
     for i, name in enumerate(restaurant_names):
         restaurant_dict = {}
-        restaurant_dict['Restaurant'] = name
+        restaurant_dict['__Restaurant'] = name
+        polarity_sum = 0
         for foodItem in intersection:
             for element in top_attr_polarity_list[i]:
                 if element['_id'] == foodItem:
-                    restaurant_dict[foodItem] = element['polarity']
-            if foodItem not in restaurant_dict:
-                restaurant_dict[foodItem] = 0
-                
+                    restaurant_dict[foodItem.title()] = element['polarity']
+                    polarity_sum += element['polarity']
+            if foodItem.title() not in restaurant_dict:
+                restaurant_dict[foodItem.title()] = 0
+
+        restaurant_dict['__Average'] = polarity_sum/items_required
+
         output_list.append(restaurant_dict)  
 
     return jsonify(output_list)
