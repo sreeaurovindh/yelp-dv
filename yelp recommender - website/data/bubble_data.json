@@ -1,0 +1,515 @@
+[
+  {
+    "_id" : {
+      "item" : "tandoori chicken"
+    },
+    "avg_polarity" : 0.23614000000000002,
+    "avg_stars" : 4,
+    "count" : 5,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "samosa"
+    },
+    "avg_polarity" : 0.8481,
+    "avg_stars" : 4,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "naan"
+    },
+    "avg_polarity" : 0.43013999999999997,
+    "avg_stars" : 4.066666666666666,
+    "count" : 15,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chana masala"
+    },
+    "avg_polarity" : 0.2247,
+    "avg_stars" : 4,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chaat"
+    },
+    "avg_polarity" : 0.2914,
+    "avg_stars" : 4,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "kofta"
+    },
+    "avg_polarity" : 0.7996,
+    "avg_stars" : 5,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "sambar"
+    },
+    "avg_polarity" : 0.47583333333333333,
+    "avg_stars" : 3.6666666666666665,
+    "count" : 3,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chicken tikka"
+    },
+    "avg_polarity" : 0.4413,
+    "avg_stars" : 4,
+    "count" : 4,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chicken tikka masala"
+    },
+    "avg_polarity" : 0.4413,
+    "avg_stars" : 4,
+    "count" : 4,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "pulao"
+    },
+    "avg_polarity" : 0.7777,
+    "avg_stars" : 5,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chicken 65"
+    },
+    "avg_polarity" : 0.68965,
+    "avg_stars" : 4,
+    "count" : 2,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "rice"
+    },
+    "avg_polarity" : 0.62786,
+    "avg_stars" : 4.2,
+    "count" : 10,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "bonda"
+    },
+    "avg_polarity" : 0.296,
+    "avg_stars" : 4,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "dal"
+    },
+    "avg_polarity" : 0.37470000000000003,
+    "avg_stars" : 4,
+    "count" : 2,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "biryani"
+    },
+    "avg_polarity" : 0,
+    "avg_stars" : 4,
+    "count" : 2,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "palak paneer"
+    },
+    "avg_polarity" : 0.9018,
+    "avg_stars" : 4,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "butter chicken"
+    },
+    "avg_polarity" : 0.4449666666666667,
+    "avg_stars" : 4.166666666666667,
+    "count" : 6,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "dosa"
+    },
+    "avg_polarity" : 0.279475,
+    "avg_stars" : 3.5,
+    "count" : 4,
+    "business_name" : [
+      {
+        "item" : "Kabab Palace"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "tandoori chicken"
+    },
+    "avg_polarity" : 0.46004999999999996,
+    "avg_stars" : 4,
+    "count" : 8,
+    "business_name" : [
+      {
+        "item" : "Passage To India"
+      },
+      {
+        "item" : "India Grill"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "paneer tikka masala"
+    },
+    "avg_polarity" : -0.1639,
+    "avg_stars" : 3,
+    "count" : 2,
+    "business_name" : [
+      {
+        "item" : "India Grill"
+      },
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "naan"
+    },
+    "avg_polarity" : 0.4585068965517241,
+    "avg_stars" : 4.137931034482759,
+    "count" : 29,
+    "business_name" : [
+      {
+        "item" : "India Grill"
+      },
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chaat"
+    },
+    "avg_polarity" : 0,
+    "avg_stars" : 4,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "India Grill"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "kofta"
+    },
+    "avg_polarity" : 0.21230000000000002,
+    "avg_stars" : 3.3333333333333335,
+    "count" : 3,
+    "business_name" : [
+      {
+        "item" : "India Grill"
+      },
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chana masala"
+    },
+    "avg_polarity" : 0.2793333333333333,
+    "avg_stars" : 3.6666666666666665,
+    "count" : 3,
+    "business_name" : [
+      {
+        "item" : "Passage To India"
+      },
+      {
+        "item" : "India Grill"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "porridge"
+    },
+    "avg_polarity" : 0.11660000000000001,
+    "avg_stars" : 3,
+    "count" : 2,
+    "business_name" : [
+      {
+        "item" : "Caffe Boa Ahwatukee"
+      },
+      {
+        "item" : "Los Taquitos"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "rice"
+    },
+    "avg_polarity" : 0.30234358974358977,
+    "avg_stars" : 3.4188034188034186,
+    "count" : 234,
+    "business_name" : [
+      {
+        "item" : "Del Yaqui"
+      },
+      {
+        "item" : "Tortilla Fish"
+      },
+      {
+        "item" : "Caffe Boa Ahwatukee"
+      },
+      {
+        "item" : "Loreto's Mexican Food"
+      },
+      {
+        "item" : "India Grill"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chicken tikka"
+    },
+    "avg_polarity" : 0.2731727272727273,
+    "avg_stars" : 3.4545454545454546,
+    "count" : 11,
+    "business_name" : [
+      {
+        "item" : "Passage To India"
+      },
+      {
+        "item" : "India Grill"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chicken tikka masala"
+    },
+    "avg_polarity" : 0.3338777777777778,
+    "avg_stars" : 3.5555555555555554,
+    "count" : 9,
+    "business_name" : [
+      {
+        "item" : "India Grill"
+      },
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "chicken 65"
+    },
+    "avg_polarity" : 0.3509333333333333,
+    "avg_stars" : 4,
+    "count" : 3,
+    "business_name" : [
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "prawns"
+    },
+    "avg_polarity" : 0.45505,
+    "avg_stars" : 3.5,
+    "count" : 2,
+    "business_name" : [
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "masala dosa"
+    },
+    "avg_polarity" : 0.5719,
+    "avg_stars" : 5,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "biryani"
+    },
+    "avg_polarity" : 0.44004000000000004,
+    "avg_stars" : 3.8,
+    "count" : 20,
+    "business_name" : [
+      {
+        "item" : "India Grill"
+      },
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "palak paneer"
+    },
+    "avg_polarity" : 0.43756666666666666,
+    "avg_stars" : 4.333333333333333,
+    "count" : 3,
+    "business_name" : [
+      {
+        "item" : "India Grill"
+      },
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "bhindi masala"
+    },
+    "avg_polarity" : 0.4404,
+    "avg_stars" : 5,
+    "count" : 1,
+    "business_name" : [
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "butter chicken"
+    },
+    "avg_polarity" : 0.5694363636363636,
+    "avg_stars" : 4,
+    "count" : 11,
+    "business_name" : [
+      {
+        "item" : "India Grill"
+      },
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "item" : "dosa"
+    },
+    "avg_polarity" : 0.54125,
+    "avg_stars" : 5,
+    "count" : 2,
+    "business_name" : [
+      {
+        "item" : "Passage To India"
+      }
+    ]
+  }
+]

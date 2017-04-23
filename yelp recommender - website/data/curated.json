@@ -1,0 +1,610 @@
+[
+  {
+    "_id" : {
+      "year" : 2008,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 50
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 50
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2008,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 100
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2008,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 50
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 50
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2008,
+      "quarter" : 4
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 50
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 50
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2009,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 3,
+        "prop" : 16.666666666666664
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 66.66666666666666
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 16.666666666666664
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2009,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 33.33333333333333
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 66.66666666666666
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2009,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 100
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2010,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 14.285714285714285
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 14.285714285714285
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 71.42857142857143
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2010,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 42.857142857142854
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 42.857142857142854
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 14.285714285714285
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2010,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 11.76470588235294
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 23.52941176470588
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 64.70588235294117
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2010,
+      "quarter" : 4
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 100
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2011,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 22.22222222222222
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 33.33333333333333
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 44.44444444444444
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2011,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 33.33333333333333
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 22.22222222222222
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 44.44444444444444
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2011,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 14.285714285714285
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 42.857142857142854
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 42.857142857142854
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2011,
+      "quarter" : 4
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 3,
+        "prop" : 100
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2012,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 100
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2012,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 3,
+        "prop" : 27.27272727272727
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 54.54545454545454
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 18.181818181818183
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2012,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 3,
+        "prop" : 33.33333333333333
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 33.33333333333333
+      },
+      {
+        "pol_group" : 1,
+        "prop" : 33.33333333333333
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2012,
+      "quarter" : 4
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 50
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 50
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2013,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 16.666666666666664
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 83.33333333333334
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2013,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 16.666666666666664
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 66.66666666666666
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 16.666666666666664
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2013,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 100
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2013,
+      "quarter" : 4
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 14.285714285714285
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 42.857142857142854
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 42.857142857142854
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2014,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 3,
+        "prop" : 14.285714285714285
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 57.14285714285714
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 28.57142857142857
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2014,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 25
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 25
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 50
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2014,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 25
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 75
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2015,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 28.57142857142857
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 71.42857142857143
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2015,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 75
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 25
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2015,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 2,
+        "prop" : 50
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 37.5
+      },
+      {
+        "pol_group" : 3,
+        "prop" : 12.5
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2015,
+      "quarter" : 4
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 50
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 50
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2016,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 3,
+        "prop" : 10
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 40
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 50
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2016,
+      "quarter" : 2
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 3,
+        "prop" : 8.333333333333332
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 58.333333333333336
+      },
+      {
+        "pol_group" : 1,
+        "prop" : 8.333333333333332
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 25
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2016,
+      "quarter" : 3
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 3,
+        "prop" : 22.22222222222222
+      },
+      {
+        "pol_group" : 1,
+        "prop" : 11.11111111111111
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 33.33333333333333
+      },
+      {
+        "pol_group" : 4,
+        "prop" : 33.33333333333333
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2016,
+      "quarter" : 4
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 66.66666666666666
+      },
+      {
+        "pol_group" : 2,
+        "prop" : 33.33333333333333
+      }
+    ]
+  },
+  {
+    "_id" : {
+      "year" : 2017,
+      "quarter" : 1
+    },
+    "pol_groups" : [
+      {
+        "pol_group" : 4,
+        "prop" : 100
+      }
+    ]
+  }
+]
