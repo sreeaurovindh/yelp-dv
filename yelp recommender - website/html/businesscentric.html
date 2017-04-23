@@ -44,7 +44,7 @@
           <div class="box box-primary center-block">
             <div class="box-header">
               <h3 class="box-title">Radius :</h3>
-              <input id="radius" data-slider-id='radiusSlider' type="text" data-slider-min="0.1" data-slider-max="20" data-slider-step=".1"
+              <input id="radius" data-slider-id='radiusSlider' type="text" data-slider-min="0.05" data-slider-max="20" data-slider-step=".01"
                 data-slider-value="1.5" />
             </div>
           </div>
@@ -128,6 +128,19 @@
 
     //Thats how you write
     //biz_radius_slider.bootstrapSlider('setValue', 4)
+
+    biz_radius_slider.on('slideStop', function(ev){
+      var biz_id
+      if(typeof business == 'undefined')
+      {
+        console.warn('No business Id found. Sample biz id used.');
+        biz_id = null;
+      }
+      else
+        biz_id = business['business_id'];
+      fetchAttributes(biz_id,
+                      biz_radius_slider.bootstrapSlider('getValue'));
+    });
   });
 
   $(function () {

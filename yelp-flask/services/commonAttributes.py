@@ -1,46 +1,102 @@
 from flask import jsonify
 from db.Mongo import mongo
 
-#Gets the top 5 most common attributes between the target business_id and
+#Gets the top N most common attributes between the target business_id and
 #  other business_ids that are within the defined radius
-def get_common_attributes(business_id, radius):
+def get_restaurant_attributes(business_id, radius):
+    nearby_restaurant_limit = 20
+    items_required = 5
+    
+    nearby_restaurant_id_list = find_nearby_restaurants_id(business_id, radius, nearby_restaurant_limit)
 
-    maxItems = 5
+    restaurant_names = get_business_names(nearby_restaurant_id_list)
+    
+    top_attr_polarity_list = []
+    top_attr_list = []
 
-    targetBusinessAttributes = mongo.db.eval("attrOfTargetBiz('"+business_id+"')")['_batch']
-    targetBusinessAttributes.sort(key=lambda x: x['count'], reverse=True)
+    for i, biz_id in enumerate(nearby_restaurant_id_list):
+        top_results = get_restaurant_top_attributes(biz_id)
+        top_attr_polarity_list.append(top_results)
+        top_attr_list.append([])
+        top_attr_list[i] = set([o['_id'] for o in top_results])
 
-    neighboringAttributes = mongo.db.eval("attrOfNeighborBiz('"+business_id+"', '"+radius+"')")['_batch']
-    neighboringAttributes.sort(key=lambda x: x['count'], reverse=True)
+    intersection = list(set.intersection(*top_attr_list))
+    
+    if len(intersection) >= items_required:
+        intersection = intersection[:items_required]
+    else:
+        uniqueAttr = top_attr_list[0] - set(intersection)
+        intersection = set(intersection) | set(list(uniqueAttr)[:items_required - len(intersection)])
 
-    targetAttr = [o['_id'] for o in targetBusinessAttributes]
-    neighborAttr = [o['_id'] for o in neighboringAttributes]
+    output_list = []
 
-    intersect = set(targetAttr) & set(neighborAttr)
+    for i, name in enumerate(restaurant_names):
+        restaurant_dict = {}
+        restaurant_dict['__Restaurant'] = name
+        polarity_sum = 0
+        for foodItem in intersection:
+            for element in top_attr_polarity_list[i]:
+                if element['_id'] == foodItem:
+                    restaurant_dict[foodItem.title()] = element['polarity']
+                    polarity_sum += element['polarity']
+            if foodItem.title() not in restaurant_dict:
+                restaurant_dict[foodItem.title()] = 0
 
-    #commonAttributes = [obj['_id'] for obj in neighboringAttributes if obj['_id'] in targetBusinessAttributes['_id']]
+        restaurant_dict['__Average'] = polarity_sum/items_required
 
-    prllPlotData = []
+        output_list.append(restaurant_dict)  
 
-    itemCount = 0
+    return jsonify(output_list)
 
-    for attr in intersect:
-        dataPoint = {}
-        for item in targetBusinessAttributes:
-            if(attr == item['_id']):
-                dataPoint['target'] = item['polarity']
-        for item in neighboringAttributes:
-            if(attr == item['_id']):
-                dataPoint['neighbor'] = item['polarity']
-                itemCount += 1        
-        dataPoint['item'] = attr
+# Finds the business name for corresponding business Ids
+def get_business_names(nearby_restaurant_id_list):
+    restaurant_names = []
 
-        prllPlotData.append(dataPoint)
-        if itemCount >= maxItems :
-            break    
+    for biz_id in nearby_restaurant_id_list:
+        restaurant = mongo.db['food_business'].find_one({ 'business_id' : biz_id })
+        restaurant_names.append(restaurant['name'])
 
-    responseString = "" + str(prllPlotData)
-    # responseString += "::" + (neighboringAttributes[0]['_id'])
-    # responseString += "::" + (str(neighboringAttributes) + " ::::::::::" + str(targetBusinessAttributes))
+    return restaurant_names
 
-    return jsonify({'targetBusiness' : business_id, 'radius': radius,'data': responseString})
+#returns the list of all nearby restaurants within radius, capped by limit
+def find_nearby_restaurants_id(business_id, radius, limit):
+    location_query_pipeline = [
+    {'$match': {'business_id': 'Sq596PqWNj7J0s-YAQmrQA'}},
+    {'$project':{'_id':0,'loc':'$loc.coordinates'}}
+    ]
+
+    target_restaurant_location =  mongo.db['food_business'].aggregate(location_query_pipeline)
+    target_coords = list(target_restaurant_location)[0]['loc']
+
+    #radius/3959 will be search radius in radians
+    neighbor_query_pipeline = [
+        {'$match': {'loc': {'$geoWithin': {'$centerSphere' : [target_coords, float(radius)/3959 ]}}}},
+        {'$sort' : {'attribute_count':-1}},
+        {'$limit': limit},
+        {'$group': {'_id':1, 'businesses': {'$push' : '$business_id'}}}
+        ]
+    
+    nearby_restaurant_id_mongo = mongo.db['food_business'].aggregate(neighbor_query_pipeline)
+    nearby_restaurant_id_list = list(nearby_restaurant_id_mongo)[0]['businesses']
+
+    if business_id in nearby_restaurant_id_list:
+        idx = nearby_restaurant_id_list.index(business_id)
+        nearby_restaurant_id_list.insert(0, nearby_restaurant_id_list.pop(idx))
+    else:
+        nearby_restaurant_id_list.insert(0, business_id)
+        nearby_restaurant_id_list.pop(len(nearby_restaurant_id_list)-1)
+
+    return nearby_restaurant_id_list
+
+#Fetches the 50 most mentioned attributes from a restaurant
+def get_restaurant_top_attributes(business_id):
+    top_attr_query_pipeline = [
+    {'$match': {'business_id': business_id}},
+    {'$project': {'polarity': "$polarity", 'item': {'$toLower':"$item"},	'value': "$value"}},
+    {'$group': {'_id': "$item", 'polarity': {'$avg': "$polarity"}, 'count' : {'$sum' : 1}}},
+	{'$sort': {'count' : -1}},
+	{'$limit' : 50}
+    ]
+
+    top_attr_mongo = mongo.db['data'].aggregate(top_attr_query_pipeline)
+    return list(top_attr_mongo)

@@ -14,6 +14,7 @@
   <script src="../lib/js/d3.js"></script>
   <script src="../lib/js/d3.svg.multibrush.js"></script>
   <script src="../lib/js/d3.parcoords.js"></script>
+  <script src="../plugins/jQuery/jQuery-2.1.3.min.js"></script>
   <title>Yelp Attributes Visualiser</title>
 </head>
 
@@ -26,29 +27,28 @@
     var factor = .75;
     var height = 480 * factor;
     var width = 640 * 2 * factor;
+    var yelpcoord;
 
     paraCoordElem = document.getElementById('yelpPC');
     paraCoordElem.style.width = width + 'px';
     paraCoordElem.style.height = height + 'px';
 
-    var paracoordOnTrigger = function (biz_Id) {
+    var paracoordOnTrigger = function () {
       d3.csv('../data/attributes.csv', function (data) {
         renderParaCoord(data);
       });
     };
 
     var renderParaCoord = function (data) {
-        var yelpcoord = d3.parcoords()("#yelpPC");
-
-        console.log(data);
-        return;
+        if(!yelpcoord)
+          yelpcoord = d3.parcoords()("#yelpPC");
 
         objectKeys = Object.keys(data[0]);
         primaryAttr = objectKeys[0];
 
         //Create the Scale we will use for the Axis
         var axisScale = d3.scale.linear()
-          .domain([1, 0])
+          .domain([1, -1])
           .range([0, height - 35]);
 
         //Axis for name column
@@ -57,7 +57,7 @@
 
         // linear color scale
         var colorScale = d3.scale.linear()
-          .domain([0, 1])
+          .domain([-1, 1])
           .range(["red", "lime"])
           .interpolate(d3.interpolateLab);
 
@@ -66,39 +66,44 @@
           .height(height)
           .dimensions(
           {
-            'Restaurant':
+            [objectKeys[objectKeys.length - 1]]:
             {
-              title: primaryAttr,
+              title: "Restaurants",
               orient: 'left',
               type: 'string',
               tickPadding: 5,
               innerTickSize: 10,
               index: 0
             },
-            'Ambience': {              
+            [objectKeys[objectKeys.length - 2]]: {
+              title: "Average",
+              type: 'number',
+              index: 1,
+              yscale: axisScale
+            },
+            [objectKeys[0]]: {              
               type: 'number',
               yscale: axisScale
             },
-            'Food': {
+            [objectKeys[1]]: {              
               type: 'number',
               yscale: axisScale
             },
-            'Service': {
+            [objectKeys[2]]: {
               type: 'number',
               yscale: axisScale
             },
-            'Neighborhood': {
+            [objectKeys[3]]: {
               type: 'number',
               yscale: axisScale
             },
-            'Average': {
+            [objectKeys[4]]: {
               type: 'number',
-              index: 0,
               yscale: axisScale
             }
           })
           .data(data)
-          .color(function (d) { return colorScale(d[objectKeys[6]]); })
+          .color(function (d) { return colorScale(d[objectKeys[objectKeys.length -2]]); })
           .animationTime(1000)
           .data(data)
           .alpha(.6)
@@ -106,7 +111,7 @@
           .mode("queue")
           .rate(1)
           .render()
-          .margin({ top: 25, left: 30, right: 0, bottom: 10 })
+          .margin({ top: 25, left: 90, right: 0, bottom: 10 })
           .reorderable()
           .brushMode("1D-axes-multi")
           .brushedColor(
@@ -165,21 +170,26 @@
             }
         });
       else
-        console.error("No query without no jquery");
+      {
+        console.warn("Switching to local");
+        paracoordOnTrigger();
+      }
     }
 
     if(window.jQuery)
       $( document ).ready(function() {
-        //Download on button click
+          //Download on button click
           downloadButton = document.getElementById("downloadImage");
           if (downloadButton)
             downloadButton.onclick = downloadScreenshot;
           
-          $("#prlplotTrigger").click(function() { fetchAttributes(null, null);});
+          var triggerElem = $("#prlplotTrigger")
+          if(triggerElem[0] != null)
+            triggerElem.click(function() { fetchAttributes(null, null);});
+          else
+              fetchAttributes(null, null);
       });
     else
-      fetchAttributes(null, null)
-
-
+      fetchAttributes(null, null);
   </script>
 </body>
