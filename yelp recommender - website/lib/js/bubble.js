@@ -197,7 +197,7 @@ function showBubbleChart() {
             .attr("class","legend")
             .attr("transform","translate(480,-2)")
             .style("font-size","10px")
-            .call(d3.legend)
+            .call(d3.legend);
 
 
     });
