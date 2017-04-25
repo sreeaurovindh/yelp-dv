@@ -41,6 +41,7 @@
         <!-- Left col -->
         <section class="col-lg-12 connectedSortable">
 
+          <!-- Radius -->
           <div class="box box-primary center-block">
             <div class="box-header" style="text-align: center;">
               <h3 class="box-title">Radius :</h3>
@@ -49,7 +50,8 @@
             </div>
           </div>
 
-          <div class="box box-danger" onclick="bubblechart()">
+          <!-- comparision chart -->
+          <div class="box box-danger" onclick="showComparisionchart()">
             <div class="box-header">
               <h3 class="box-title">Stacked Bar Chart</h3>
             </div>
@@ -60,6 +62,7 @@
             </div>
           </div>
 
+          <!-- Parallel chord -->
           <div class="box box-solid bg-teal-gradient">
             <div class="box-header">
               <i id="prlplotTrigger" class="fa fa-th"></i>
@@ -69,9 +72,20 @@
               </div>
             </div>
             <div class="box-body border-radius-none">
-              <div class="chart" id="parallelcoord" style="height: 250px;"></div>
+              <div class="chart" id="parallelcoord" style="min-height: 350px;"></div>
             </div>
+          </div>
 
+          <!-- Bubble chart -->
+          <div class="box box-danger" onclick="showBubbleChart()">
+            <div class="box-header">
+              <h3 class="box-title">Bubble Chart</h3>
+            </div>
+            <div class="box-footer">
+              <div class="input-group">
+                <div class="bubblechart" id="bubblechart" style="min-height: 550px;"></div>
+              </div>
+            </div>
           </div>
 
         </section>

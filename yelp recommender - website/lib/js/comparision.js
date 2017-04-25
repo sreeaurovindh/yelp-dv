@@ -1,4 +1,4 @@
-function bubblechart() {
+function showComparisionchart() {
     $("#comparisionbody").html("");
     var causes = ["Poor", "Fair", "Good", "Excellent"];
 
