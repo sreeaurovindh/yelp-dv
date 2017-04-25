@@ -64,13 +64,13 @@
           </div>
 
           <!-- Parallel chord -->
-          <div class="box box-solid bg-teal-gradient">
-            <div class="box-header">
+          <div class="box box-solid">
+            <div class="box-header" onclick="showParallelcoord();">
               <i class="fa fa-th"></i>
               <h3 class="box-title">Comparing attributes against neighbors</h3>
             </div>
             <div class="box-body border-radius-none">
-              <div class="chart" id="parallelcoord" style="min-height: 350px;"></div>
+              <div id="yelpPC" class="parcoords" style="min-height: 350px;"></div>
             </div>
           </div>
 
@@ -129,7 +129,7 @@
     });
   });
 
-  $(function () {
-    $("#parallelcoord").load("html/parallelcoord.html");
-  });
+  // $(function () {
+  //   $("#parallelcoord").load("html/parallelcoord.html");
+  // });
 </script>

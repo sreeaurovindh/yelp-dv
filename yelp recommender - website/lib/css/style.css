@@ -60,3 +60,7 @@ h3 {
 input {
   font-size: 16px;
 }
+
+#ex1Slider .slider-selection {
+  background: #BABABA;
+}
