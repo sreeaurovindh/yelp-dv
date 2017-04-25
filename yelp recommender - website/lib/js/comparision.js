@@ -1,4 +1,5 @@
 function bubblechart() {
+    $("#comparisionbody").html("");
     var causes = ["Poor", "Fair", "Good", "Excellent"];
 
     var margin = {top: 40, right: 25, bottom: 40, left: 50},
@@ -33,13 +34,13 @@ function bubblechart() {
         .scale(y)
         .orient("right");
 
-    var chart1 = d3.select("#bubblebody").append("svg")
+    var chart1 = d3.select("#comparisionbody").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var tooltipdiv_comp = d3.select("#bubblebody").append("tooltipdiv_comp")
+    var tooltipdiv_comp = d3.select("#comparisionbody").append("tooltipdiv_comp")
         .attr("class", "tooltip")
         .style("opacity", 0);
 
@@ -166,13 +167,13 @@ function bubblechart() {
 
         verticalLegend = d3.svg.legend().labelFormat("none").cellPadding(5).orientation("vertical").units("Sentiment").cellWidth(15).cellHeight(10).inputScale(z).cellStepping(10);
 
-        d3.select("#bubblebody").append("svg").append("g").attr("transform", "translate(20,91)").attr("class", "legend").call(verticalLegend);
+        d3.select("#comparisionbody").append("svg").append("g").attr("transform", "translate(20,91)").attr("class", "legend").call(verticalLegend);
 
 
     });
 
     var pol_groups_c2 = [];
-    var chart2 = d3.select("#bubblebody").append("svg")
+    var chart2 = d3.select("#comparisionbody").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")

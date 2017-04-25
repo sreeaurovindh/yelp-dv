@@ -39,10 +39,10 @@
       <div class="row">
 
         <!-- Left col -->
-        <section class="col-lg-7 connectedSortable">
+        <section class="col-lg-12 connectedSortable">
 
           <div class="box box-primary center-block">
-            <div class="box-header">
+            <div class="box-header" style="text-align: center;">
               <h3 class="box-title">Radius :</h3>
               <input id="radius" data-slider-id='radiusSlider' type="text" data-slider-min="0.05" data-slider-max="20" data-slider-step=".01"
                 data-slider-value="1.5" />
@@ -55,7 +55,7 @@
             </div>
             <div class="box-footer">
               <div class="input-group">
-                <div class="bubblebody" id="bubblebody" style="height: 250px;"></div>
+                <div class="comparisionbody" id="comparisionbody" style="min-height: 350px;"></div>
               </div>
             </div>
           </div>
@@ -76,33 +76,6 @@
 
         </section>
         <!-- /.Left col -->
-        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-        <section class="col-lg-5 connectedSortable">
-
-          <!-- Map box -->
-          <div class="box box-solid bg-light-blue-gradient">
-            <div class="box-header">
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip" title="Date range"><i class="fa fa-calendar"></i></button>
-                <button class="btn btn-primary btn-sm pull-right" data-widget='collapse' data-toggle="tooltip" title="Collapse" style="margin-right: 5px;"><i class="fa fa-minus"></i></button>
-              </div>
-              <!-- /. tools -->
-
-              <i class="fa fa-map-marker"></i>
-              <h3 class="box-title">
-                Map
-              </h3>
-            </div>
-            <div class="box-body">
-              <div id="world-map" style="height: 250px; width: 100%;"></div>
-            </div>
-
-          </div>
-          <!-- /.box -->
-
-        </section>
-        <!-- right col -->
       </div>
       <!-- /.row (main row) -->
 
