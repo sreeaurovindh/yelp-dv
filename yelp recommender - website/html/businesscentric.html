@@ -52,9 +52,9 @@
 
           <!-- comparision chart -->
           <div class="box box-danger">
-            <div class="box-header" onclick="showComparisionchart()">
-              <i class="fa fa-bar-chart-o"></i>
-              <h3 class="box-title">Stacked Bar Chart</h3>
+            <div class="box-header" >
+              <i class="fa fa-bar-chart-o" onclick="fetchAttributesForComparision()"></i>
+              <h3 class="box-title" onclick="showComparisionchart()">Stacked Bar Chart</h3 >
             </div>
             <div class="box-footer">
               <div class="input-group">
@@ -76,8 +76,8 @@
 
           <!-- Bubble chart -->
           <div class="box box-success">
-            <div class="box-header" onclick="showBubbleChart()">
-              <i class="fa fa-circle"></i>
+            <div class="box-header">
+              <i class="fa fa-circle" onclick="showBubbleChart(null,null,'2008-01-01','2016-12-31')"></i>
               <h3 class="box-title">Bubble Chart</h3>
             </div>
             <div class="box-footer">
@@ -126,6 +126,9 @@
         biz_id = business['business_id'];
       fetchAttributes(biz_id,
                       biz_radius_slider.bootstrapSlider('getValue'));
+
+      fetchAttributesForComparision(biz_id,
+            biz_radius_slider.bootstrapSlider('getValue'));
     });
   });
 

@@ -164,6 +164,8 @@ var showOnMap = function (response) {
       infowindow.open(map, marker);
       getUserListForBusiness(business['business_id']);
       fetchAttributes(business['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
+      fetchAttributesForComparision(business['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
+
     });
 
     return marker;

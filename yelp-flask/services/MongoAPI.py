@@ -5,6 +5,7 @@ from db.Mongo import mongo
 from services import recommendService as recommend
 from services import commonAttributes
 from services import businessService as business
+from services import foodOnBizReviews
 
 mongo_api = Blueprint('mongo_api', __name__)
 
@@ -44,7 +45,31 @@ def get_common_attributes(business_id, radius):
     return commonAttributes.get_restaurant_attributes(business_id, radius)
   except Exception as err:
     return jsonify({'error' : "Something went wrong! "+ str(err)})
-    
+
+#Gets the data for stacked bar chart(Sree) - Target Biz chart data
+@mongo_api.route("/foodqualityvariation/<business_id>", methods=['GET'])
+def get_target_food_quality(business_id):
+  try:
+    return foodOnBizReviews.getTargetBizChart(business_id)
+  except Exception as err:
+    return jsonify({'error' : "Something went wrong! "+ str(err)})
+
+#Gets the data for stacked bar chart(Sree) - Neighboring Biz chart data
+@mongo_api.route("/foodqualityvariation/<business_id>/radius/<radius>", methods=['GET'])
+def get_neighboring_food_quality(business_id, radius):
+  try:
+    return foodOnBizReviews.getNeighboringBizChart(business_id, radius)
+  except Exception as err:
+    return jsonify({'error' : "Something went wrong! "+ str(err)})
+
+#Gets the food item data for bubble chart(Sree) - food items within start/end dates
+@mongo_api.route("/foodItems/<business_id>/radius/<radius>/start_year/<start_year>/end_year/<end_year>", methods=['GET'])
+def get_food_items(business_id, radius, start_year, end_year):
+  try:
+    return foodOnBizReviews.getFoodItems(business_id, radius, start_year, end_year)
+  except Exception as err:
+    return jsonify({'error' : "Something went wrong! "+ str(err)})
+
 @mongo_api.route("/business/locationtype/<locationtype>/location/<location>", methods=['GET'])
 def get_restaurant_details(locationtype, location):
   try:

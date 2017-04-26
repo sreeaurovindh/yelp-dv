@@ -1,5 +1,4 @@
-function showComparisionchart() {
-    $("#comparisionbody").html("");
+function showNearbyRestaurants_business(data) {
     var causes = ["Poor", "Fair", "Good", "Excellent"];
 
     var margin = {top: 40, right: 25, bottom: 40, left: 50},
@@ -47,7 +46,7 @@ function showComparisionchart() {
     var pol_groups_c1 = [];
 
 
-    d3.json("data/single.json", function (data) {
+
         for (var i in data) {
             var item = data[i];
             var pol_dict = {};
@@ -139,7 +138,18 @@ function showComparisionchart() {
                 var pol_value = dict_rating[d.name];
                 var year = d.x.split("-")[0];
                 var quarter = d.x.split("-")[1];
+                var start_year = year+'-01-01';
+                var end_year = year+'-12-31';
                 alert(year);
+                if(typeof business !== 'undefined')
+                {
+                    biz_id_bubble = business['business_id'];
+                }
+                else
+                {
+                    biz_id_bubble = null
+                }
+                showBubbleChart(biz_id_bubble, biz_radius_slider.bootstrapSlider('getValue'),start_year,end_year);
             })
 
 
@@ -162,7 +172,7 @@ function showComparisionchart() {
             .attr("dy", ".15em")
             .attr("transform", function (d) {
                 return "rotate(65)"
-            });
+
 
 
         verticalLegend = d3.svg.legend().labelFormat("none").cellPadding(5).orientation("vertical").units("Sentiment").cellWidth(15).cellHeight(10).inputScale(z).cellStepping(10);
@@ -171,6 +181,53 @@ function showComparisionchart() {
 
 
     });
+}
+
+function showComparisionchart(data) {
+    //$("#comparisionbody").html("");
+    var causes = ["Poor", "Fair", "Good", "Excellent"];
+
+    var margin = {top: 40, right: 25, bottom: 40, left: 50},
+        width = 450 - margin.left - margin.right,
+        height = 250 - margin.top - margin.bottom;
+
+    var x = d3.scale.ordinal()
+        .rangeRoundBands([0, width]);
+
+    var y = d3.scale.linear()
+        .rangeRound([height, 0]);
+
+    var z = d3.scale.ordinal()
+        .domain(["Poor", "Fair", "Good", "Excellent"])
+        .range(["#ca0020", "#f4a582", "#92c5de", "#0571b0"]);
+
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom").tickFormat(function (d) {
+            return +d.split("-")[1] //
+        });
+
+    var x2Axis = d3.svg.axis()
+        .scale(x)
+        .tickFormat(function (d) {
+            return +d.split("-")[0] //"Year1 Year2, etc depending on the tick value - 0,1,2,3,4"
+        })
+        .orient("top");
+
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("right");
+
+    var chart1 = d3.select("#comparisionbody").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var tooltipdiv_comp = d3.select("#comparisionbody").append("tooltipdiv_comp")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     var pol_groups_c2 = [];
     var chart2 = d3.select("#comparisionbody").append("svg")
@@ -180,7 +237,7 @@ function showComparisionchart() {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-    d3.json("data/curated.json", function (data) {
+
         for (var i in data) {
             var item = data[i];
             var pol_dict = {};
@@ -284,6 +341,55 @@ function showComparisionchart() {
                 return "rotate(65)"
             });
 
-    });
 
+
+}
+
+var fetchAttributesForComparision = function (businessid, radius) {
+    $("#comparisionbody").html("");
+    if (businessid == null) {
+        businessid = "Sq596PqWNj7J0s-YAQmrQA";
+        console.warn('Using sample biz_id = ' + businessid);
+    }
+
+    if (radius == null) {
+        radius = 1;
+        console.warn('Using sample radius =' + radius);
+    }
+
+    if (window.jQuery)
+        $.ajax({
+            type: "GET",
+            url: 'http://localhost:5000' + "/getdata/foodqualityvariation/" + businessid,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                showNearbyRestaurants_business(response);
+            },
+            error: function (xhr, textStatus, errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+    else {
+        console.warn("Switching to local");
+        // paracoordOnTrigger();
+    }
+
+    if (window.jQuery)
+        $.ajax({
+            type: "GET",
+            url: 'http://localhost:5000' + "/getdata/foodqualityvariation/" + businessid + "/radius/" + radius,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                showComparisionchart(response);
+            },
+            error: function (xhr, textStatus, errorMessage) {
+                console.log(errorMessage);
+            }
+        });
+    else {
+        console.warn("Switching to local");
+        // paracoordOnTrigger();
+    }
 }
