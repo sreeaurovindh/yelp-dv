@@ -120,8 +120,8 @@ function showNearbyRestaurants_business(data) {
                     .duration(200)
                     .style("opacity", .9);
                 tooltipdiv_comp.html(d.name + ": " + Math.round(delta) + "%" + "<br/>")
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
+                    .style("left", xPos + "px")
+                    .style("top", yPos + "px");
 
             })
             .on("mouseout", function () {
@@ -296,27 +296,31 @@ function showComparisionchart(data) {
         layer.selectAll("rect")
             .on("mouseover", function (d) {
 
+                var hoverArray = document.querySelectorAll( ":hover" );
+                var elem = hoverArray[hoverArray.length - 1];
+                var elemUpper = hoverArray[hoverArray.length - 2];
+                var rectObject = elemUpper.getBoundingClientRect();
+                //console.log(rectObject);
+
                 var delta = d.y;
-                var xPos = parseFloat(d3.select(this).attr("x"));
-                var yPos = parseFloat(d3.select(this).attr("y"));
-                var height = parseFloat(d3.select(this).attr("height"))
 
                 d3.select(this).attr("stroke", "red").attr("stroke-width", 0.8);
 
+                tooltipdiv_comp.html(d.name + ": " + Math.round(delta) + "%" + "<br/>")
+                    .style("opacity", .9)
+                    .style("left", (rectObject.left + "px"))
+                    .style("top", (rectObject.top + "px"));
 
                 tooltipdiv_comp.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                tooltipdiv_comp.html(d.name + ": " + Math.round(delta) + "%" + "<br/>")
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
+                    .duration(10)
+                    .style("opacity", 1);
             })
             .on("mouseout", function () {
 
                 d3.select(this).attr("stroke", "white").attr("stroke-width", 0.2);
 
                 tooltipdiv_comp.transition()
-                    .duration(200)
+                    .duration(1000)
                     .style("opacity", 0);
             })
 
