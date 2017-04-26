@@ -2,8 +2,8 @@ function showNearbyRestaurants_business(data) {
     var causes = ["Poor", "Fair", "Good", "Excellent"];
 
     var margin = {top: 40, right: 25, bottom: 40, left: 50},
-        width = 450 - margin.left - margin.right,
-        height = 250 - margin.top - margin.bottom;
+        width = 550 - margin.left - margin.right,
+        height = 350 - margin.top - margin.bottom;
 
     var x = d3.scale.ordinal()
         .rangeRoundBands([0, width]);
@@ -188,8 +188,8 @@ function showComparisionchart(data) {
     var causes = ["Poor", "Fair", "Good", "Excellent"];
 
     var margin = {top: 40, right: 25, bottom: 40, left: 50},
-        width = 450 - margin.left - margin.right,
-        height = 250 - margin.top - margin.bottom;
+        width = 550 - margin.left - margin.right,
+        height = 350 - margin.top - margin.bottom;
 
     var x = d3.scale.ordinal()
         .rangeRoundBands([0, width]);
@@ -219,11 +219,7 @@ function showComparisionchart(data) {
         .scale(y)
         .orient("right");
 
-    var chart1 = d3.select("#comparisionbody").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
 
     var tooltipdiv_comp = d3.select("#comparisionbody").append("tooltipdiv_comp")
         .attr("class", "tooltip")
@@ -296,24 +292,28 @@ function showComparisionchart(data) {
         layer.selectAll("rect")
             .on("mouseover", function (d) {
 
-                var hoverArray = document.querySelectorAll( ":hover" );
-                var elem = hoverArray[hoverArray.length - 1];
-                var elemUpper = hoverArray[hoverArray.length - 2];
-                var rectObject = elemUpper.getBoundingClientRect();
+                // var hoverArray = document.querySelectorAll( ":hover" );
+                // var elem = hoverArray[hoverArray.length - 1];
+                // var elemUpper = hoverArray[hoverArray.length - 2];
+                // var rectObject = elemUpper.getBoundingClientRect();
                 //console.log(rectObject);
 
                 var delta = d.y;
+                var xPos = parseFloat(d3.select(this).attr("x"));
+                var yPos = parseFloat(d3.select(this).attr("y"));
+                var height = parseFloat(d3.select(this).attr("height"))
 
                 d3.select(this).attr("stroke", "red").attr("stroke-width", 0.8);
 
+                tooltipdiv_comp.transition()
+                    .duration(200)
+                    .style("opacity", 0.9);
                 tooltipdiv_comp.html(d.name + ": " + Math.round(delta) + "%" + "<br/>")
                     .style("opacity", .9)
-                    .style("left", (rectObject.left + "px"))
-                    .style("top", (rectObject.top + "px"));
+                    .style("left", (xPos+width + "px"))
+                    .style("top", (yPos+ "px"));
 
-                tooltipdiv_comp.transition()
-                    .duration(10)
-                    .style("opacity", 1);
+
             })
             .on("mouseout", function () {
 
