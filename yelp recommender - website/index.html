@@ -16,16 +16,17 @@
     <link href="lib/css/map.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" type="text/css" href="lib/css/d3.parcoords.css"/>
     <link href="lib/css/bubble.css" rel="stylesheet" type="text/css" />
+    <link href="lib/css/sundial.css" rel="stylesheet" type="text/css" />
     <link href="lib/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.3/css/bootstrap-slider.css" rel="stylesheet" />
   </head>
 
-  <body class="skin-blue wysihtml5-supported sidebar-collapse sidebar-open" onload="initMap();">
+  <body class="skin-blue wysihtml5-supported sidebar-collapse sidebar-open" onload="initMap();showSundial();">
     <div class="wrapper">
       
       <header class="main-header">
         <!-- Logo -->
-        <a href="index.html" class="logo"><b>YELP </b>VISUAL RECOMMENDER</a>
+        <a href="index.html" class="logo"><b>YELP</b><i style="color:red;" class="fa fa-yelp"></i> VISUAL RECOMMENDER</a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
         </nav>
@@ -66,6 +67,7 @@
     <script src="lib/js/d3.parcoords.js"></script>	
     <script src="lib/js/bubble.js"></script>
     <script src="lib/js/parallelchord.js"></script>
+    <script src="lib/js/sundial.js"></script>
     <!-- Business centric -->
     <!-- Boot strap slider at https://github.com/seiyria/bootstrap-slider -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.3/bootstrap-slider.js"></script>

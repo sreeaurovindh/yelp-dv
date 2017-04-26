@@ -1,20 +1,17 @@
 from db.Mongo import mongo
 from operator import itemgetter
 
-def get_business_details_by_location(location_type, location):
+def get_business_details_by_location(location_type, location, cuisine):
   query = {}
   business_limit = 100
   if location_type == "state":
-    print("state")
     query['state'] = location.upper()
     business_limit = 300
   elif location_type == "city":
-    print("city")
     query['city'] = location
+    if cuisine != "none":
+      query['categories'] = cuisine
     business_limit = 200
-  elif location_type == "zipcode":
-    print("zipcode")
-    query['postal_code'] = location
   else:
     return {}
 

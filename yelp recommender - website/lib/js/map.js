@@ -1,5 +1,7 @@
 var map;
 var infowindow;
+var markerCluster = null;
+var markers = [];
 
 var mapStyles = {
   default: null,
@@ -135,10 +137,11 @@ function initMap() {
   map.setOptions({styles: mapStyles["retro"]});
 }
 
-var getBusinessData = function (location_type, location) {
+var getBusinessData = function (location_type, location, cuisine) {
+  removeMarkers();
   $.ajax({
     type: "GET",
-    url: baseurl + "/getdata/business/locationtype/" + location_type + "/location/" + location,
+    url: baseurl + "/getdata/business/locationtype/" + location_type + "/location/" + location + "/" + cuisine,
     contentType: "application/json; charset=utf-8",
     dataType: "json",
     success: showOnMap,
@@ -153,7 +156,7 @@ var showOnMap = function (response) {
 
   infowindow = new google.maps.InfoWindow();
 
-  var markers = data.map(function (business, i) {
+  markers = data.map(function (business, i) {
     var marker = new google.maps.Marker({
       position: business['location'],
       label: business['name'].charAt(0)
@@ -165,14 +168,28 @@ var showOnMap = function (response) {
       getUserListForBusiness(business['business_id']);
       fetchAttributes(business['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
       fetchAttributesForComparision(business['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
-
     });
 
+    if(data.length > 0){
+      map.setCenter(new google.maps.LatLng(data[0]['location']['lat'], data[0]['location']['lng']));
+      map.setZoom(8);
+    }
     return marker;
   });
 
-  var markerCluster = new MarkerClusterer(map, markers,
+  markerCluster = new MarkerClusterer(map, markers,
     { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+}
+
+var removeMarkers = function(){
+  var i = 0, l = markers.length;
+  for (i; i<l; i++) {
+      markers[i].setMap(null)
+  }
+  markers = [];
+  if(markerCluster != null){
+    markerCluster.clearMarkers();
+  }
 }
 
 var getUserListForBusiness = function (businessid) {
@@ -185,6 +202,7 @@ var getUserListForBusiness = function (businessid) {
       populateUserList(response, businessid);
     },
     error: function (xhr, textStatus, errorMessage) {
+      $('.review-user-list').html("No reviewers as of now!");
       console.log(errorMessage);
     }
   });
@@ -194,7 +212,7 @@ var populateUserList = function (response, businessid) {
   var data = response['data'];
   var content = "";
   for (user in data) {
-    content += '<a href="#"><div style="padding-left: 40px; font-size: larger; font-weight: bold;" '
+    content += '<a><div style="padding-left: 40px; font-size: larger; font-weight: bold;" '
     +'onclick="populateRestaurantRecommendation(\''+businessid+'\',\''+ data[user]['user_id'] + '\')">' + data[user]['name'] + '</div></a><hr>'
   }
 

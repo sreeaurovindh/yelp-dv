@@ -70,10 +70,10 @@ def get_food_items(business_id, radius, start_year, end_year):
   except Exception as err:
     return jsonify({'error' : "Something went wrong! "+ str(err)})
 
-@mongo_api.route("/business/locationtype/<locationtype>/location/<location>", methods=['GET'])
-def get_restaurant_details(locationtype, location):
+@mongo_api.route("/business/locationtype/<locationtype>/location/<location>/<cuisine>", methods=['GET'])
+def get_restaurant_details(locationtype, location, cuisine):
   try:
-    res = business.get_business_details_by_location(locationtype, location)
+    res = business.get_business_details_by_location(locationtype, location, cuisine)
     return jsonify({'data' : res})
   except Exception as err:
     return jsonify({'error' : "Something went wrong! "+ str(err)})
