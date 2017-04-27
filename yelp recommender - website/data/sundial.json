@@ -4080,16 +4080,6 @@
                            "description":"Scandinavian"
                         },
                         {  
-                           "name":"Tapas/Small Plates",
-                           "size":"1",
-                           "description":"Tapas/Small Plates"
-                        },
-                        {  
-                           "name":"Fish & Chips",
-                           "size":"1",
-                           "description":"Fish & Chips"
-                        },
-                        {  
                            "name":"African",
                            "size":"1",
                            "description":"African"
@@ -4108,36 +4098,6 @@
                            "name":"Argentine",
                            "size":"1",
                            "description":"Argentine"
-                        },
-                        {  
-                           "name":"Poutineries",
-                           "size":"1",
-                           "description":"Poutineries"
-                        },
-                        {  
-                           "name":"Hot Pot",
-                           "size":"1",
-                           "description":"Hot Pot"
-                        },
-                        {  
-                           "name":"Hawaiian",
-                           "size":"1",
-                           "description":"Hawaiian"
-                        },
-                        {  
-                           "name":"Cheesesteaks",
-                           "size":"1",
-                           "description":"Cheesesteaks"
-                        },
-                        {  
-                           "name":"Creperies",
-                           "size":"1",
-                           "description":"Creperies"
-                        },
-                        {  
-                           "name":"Diners",
-                           "size":"1",
-                           "description":"Diners"
                         },
                         {  
                            "name":"Tapas Bars",
@@ -4170,36 +4130,6 @@
                            "description":"French"
                         },
                         {  
-                           "name":"Steakhouses",
-                           "size":"1",
-                           "description":"Steakhouses"
-                        },
-                        {  
-                           "name":"Barbeque",
-                           "size":"1",
-                           "description":"Barbeque"
-                        },
-                        {  
-                           "name":"Vietnamese",
-                           "size":"1",
-                           "description":"Vietnamese"
-                        },
-                        {  
-                           "name":"Taiwanese",
-                           "size":"1",
-                           "description":"Taiwanese"
-                        },
-                        {  
-                           "name":"Laotian",
-                           "size":"1",
-                           "description":"Laotian"
-                        },
-                        {  
-                           "name":"Chicken Shop",
-                           "size":"1",
-                           "description":"Chicken Shop"
-                        },
-                        {  
                            "name":"Malaysian",
                            "size":"1",
                            "description":"Malaysian"
@@ -4223,26 +4153,6 @@
                            "name":"Vegetarian",
                            "size":"1",
                            "description":"Vegetarian"
-                        },
-                        {  
-                           "name":"Live/Raw Food",
-                           "size":"1",
-                           "description":"Live/Raw Food"
-                        },
-                        {  
-                           "name":"Moroccan",
-                           "size":"1",
-                           "description":"Moroccan"
-                        },
-                        {  
-                           "name":"Hot Dogs",
-                           "size":"1",
-                           "description":"Hot Dogs"
-                        },
-                        {  
-                           "name":"Soup",
-                           "size":"1",
-                           "description":"Soup"
                         },
                         {  
                            "name":"Italian",
@@ -4280,26 +4190,6 @@
                            "description":"Buffets"
                         },
                         {  
-                           "name":"Cajun/Creole",
-                           "size":"1",
-                           "description":"Cajun/Creole"
-                        },
-                        {  
-                           "name":"Vegan",
-                           "size":"1",
-                           "description":"Vegan"
-                        },
-                        {  
-                           "name":"Greek",
-                           "size":"1",
-                           "description":"Greek"
-                        },
-                        {  
-                           "name":"Halal",
-                           "size":"1",
-                           "description":"Halal"
-                        },
-                        {  
                            "name":"Mexican",
                            "size":"1",
                            "description":"Mexican"
@@ -4318,16 +4208,6 @@
                            "name":"Seafood",
                            "size":"1",
                            "description":"Seafood"
-                        },
-                        {  
-                           "name":"Breakfast & Brunch",
-                           "size":"1",
-                           "description":"Breakfast & Brunch"
-                        },
-                        {  
-                           "name":"Ethiopian",
-                           "size":"1",
-                           "description":"Ethiopian"
                         },
                         {  
                            "name":"Chicken Wings",
@@ -4355,24 +4235,9 @@
                            "description":"Chinese"
                         },
                         {  
-                           "name":"Delis",
-                           "size":"1",
-                           "description":"Delis"
-                        },
-                        {  
-                           "name":"Food Stands",
-                           "size":"1",
-                           "description":"Food Stands"
-                        },
-                        {  
                            "name":"British",
                            "size":"1",
                            "description":"British"
-                        },
-                        {  
-                           "name":"Wraps",
-                           "size":"1",
-                           "description":"Wraps"
                         },
                         {  
                            "name":"Burgers",
@@ -4433,26 +4298,6 @@
                            "name":"American (Traditional)",
                            "size":"1",
                            "description":"American (Traditional)"
-                        },
-                        {  
-                           "name":"Salad",
-                           "size":"1",
-                           "description":"Salad"
-                        },
-                        {  
-                           "name":"Sushi Bars",
-                           "size":"1",
-                           "description":"Sushi Bars"
-                        },
-                        {  
-                           "name":"Gluten-Free",
-                           "size":"1",
-                           "description":"Gluten-Free"
-                        },
-                        {  
-                           "name":"Pakistani",
-                           "size":"1",
-                           "description":"Pakistani"
                         }
                      ]
                   },

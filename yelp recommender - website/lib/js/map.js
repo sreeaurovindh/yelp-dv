@@ -2,6 +2,8 @@ var map;
 var infowindow;
 var markerCluster = null;
 var markers = [];
+var business = {};
+
 
 var mapStyles = {
   default: null,
@@ -156,18 +158,21 @@ var showOnMap = function (response) {
 
   infowindow = new google.maps.InfoWindow();
 
-  markers = data.map(function (business, i) {
+  markers = data.map(function (business1, i) {
     var marker = new google.maps.Marker({
-      position: business['location'],
-      label: business['name'].charAt(0)
+      position: business1['location'],
+      label: business1['name'].charAt(0)
     });
 
     marker.addListener('click', function () {
-      infowindow.setContent('<div><b>' + business['name'] + '</b></div><div>' + business['address'] + '</div><div>Rating: <b>' + business['stars'] + '</b> stars</div>');
+      d3.select("#recommendation-chart").html("");
+      infowindow.setContent('<div><b>' + business1['name'] + '</b></div><div>' + business1['address'] + '</div><div>Rating: <b>' + business1['stars'] + '</b> stars</div>');
       infowindow.open(map, marker);
-      getUserListForBusiness(business['business_id']);
-      fetchAttributes(business['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
-      fetchAttributesForComparision(business['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
+      getUserListForBusiness(business1['business_id']);
+      fetchAttributes(business1['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
+      fetchAttributesForComparision(business1['business_id'], biz_radius_slider.bootstrapSlider('getValue'));
+      business['business_id'] = business1['business_id'];
+      
     });
 
     if(data.length > 0){
