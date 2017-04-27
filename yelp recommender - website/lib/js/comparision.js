@@ -310,8 +310,8 @@ function showComparisionchart(data) {
                     .style("opacity", 0.9);
                 tooltipdiv_comp.html(d.name + ": " + Math.round(delta) + "%" + "<br/>")
                     .style("opacity", .9)
-                    .style("left", (xPos+width + "px"))
-                    .style("top", (yPos+ "px"));
+                    .style("left", (xPos+width+20 + "px"))
+                    .style("top", (yPos+70 +"px"));
 
 
             })
