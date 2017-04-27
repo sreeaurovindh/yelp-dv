@@ -173,11 +173,6 @@ function showNearbyRestaurants_business(data) {
             .attr("transform", function (d) {
                 return "rotate(65)"
 
-
-
-
-
-
     });
     var verticalLegend = d3.svg.legend().labelFormat("none").cellPadding(5).orientation("vertical").units("Sentiment").cellWidth(15).cellHeight(10).inputScale(z).cellStepping(10);
 
@@ -311,8 +306,8 @@ function showComparisionchart(data) {
                     .style("opacity", 0.9);
                 tooltipdiv_comp.html(d.name + ": " + Math.round(delta) + "%" + "<br/>")
                     .style("opacity", .9)
-                    .style("left", (xPos+width+20 + "px"))
-                    .style("top", (yPos+70 +"px"));
+                    .style("left", ((xPos+width+350) + "px"))
+                    .style("top", ((yPos+50) +"px"));
 
 
             })
