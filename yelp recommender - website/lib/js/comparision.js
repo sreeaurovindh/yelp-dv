@@ -140,7 +140,7 @@ function showNearbyRestaurants_business(data) {
                 var quarter = d.x.split("-")[1];
                 var start_year = year+'-01-01';
                 var end_year = year+'-12-31';
-                alert(year);
+                //alert(year);
                 if(typeof business !== 'undefined')
                 {
                     biz_id_bubble = business['business_id'];
@@ -175,12 +175,13 @@ function showNearbyRestaurants_business(data) {
 
 
 
-        verticalLegend = d3.svg.legend().labelFormat("none").cellPadding(5).orientation("vertical").units("Sentiment").cellWidth(15).cellHeight(10).inputScale(z).cellStepping(10);
 
-        d3.select("#comparisionbody").append("svg").append("g").attr("transform", "translate(20,91)").attr("class", "legend").call(verticalLegend);
 
 
     });
+    var verticalLegend = d3.svg.legend().labelFormat("none").cellPadding(5).orientation("vertical").units("Sentiment").cellWidth(15).cellHeight(10).inputScale(z).cellStepping(10);
+
+    d3.select("#comparisionbody").append("svg").append("g").attr("transform", "translate(20,91)").attr("class", "legend").call(verticalLegend);
 }
 
 function showComparisionchart(data) {
