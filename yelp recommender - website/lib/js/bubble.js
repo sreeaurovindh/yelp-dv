@@ -224,10 +224,10 @@ function renderChart(d) {
             .style("opacity", 0);
 
     }
-    legend = //svg.append("g")
-        d3.select('.bubblechart').append("g")
+    legend = svg.append("g")
+        //d3.select('.bubblechart svg').append("g")
         .attr("class","legend")
-        .attr("transform","translate(480,-2)")
+        .attr("transform","translate(100,-2)")
         .style("font-size","10px")
         .call(d3.legend);
 
