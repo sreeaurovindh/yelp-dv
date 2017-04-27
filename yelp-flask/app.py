@@ -7,8 +7,8 @@ app = Flask(__name__)
 CORS(app)
 
 # config details for mongodb
-app.config['MONGO_DBNAME'] = 'yelp_dv'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/yelp_dv'
+app.config['MONGO_DBNAME'] = 'yelp'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/yelp'
 
 mongo.init_app(app)
 

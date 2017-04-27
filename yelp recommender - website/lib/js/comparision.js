@@ -1,4 +1,4 @@
-function showNearbyRestaurants_business(data) {
+function showNearbyRestaurants_business(data, businessid) {
     var causes = ["Poor", "Fair", "Good", "Excellent"];
 
     var margin = {top: 40, right: 25, bottom: 40, left: 50},
@@ -149,7 +149,7 @@ function showNearbyRestaurants_business(data) {
                 {
                     biz_id_bubble = null
                 }
-                showBubbleChart(biz_id_bubble, biz_radius_slider.bootstrapSlider('getValue'),start_year,end_year);
+                showBubbleChart(businessid, biz_radius_slider.bootstrapSlider('getValue'),start_year,end_year);
             })
 
 
@@ -364,7 +364,7 @@ var fetchAttributesForComparision = function (businessid, radius) {
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                showNearbyRestaurants_business(response);
+                showNearbyRestaurants_business(response, businessid);
             },
             error: function (xhr, textStatus, errorMessage) {
                 console.log(errorMessage);

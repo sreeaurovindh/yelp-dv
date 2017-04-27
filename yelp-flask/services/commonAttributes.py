@@ -53,7 +53,7 @@ def get_business_names(nearby_restaurant_id_list):
     restaurant_names = []
 
     for biz_id in nearby_restaurant_id_list:
-        restaurant = mongo.db['food_business'].find_one({ 'business_id' : biz_id })
+        restaurant = mongo.db['foodbusiness'].find_one({ 'business_id' : biz_id })
         restaurant_names.append(restaurant['name'])
 
     return restaurant_names
@@ -65,7 +65,7 @@ def find_nearby_restaurants_id(business_id, radius, limit):
     {'$project':{'_id':0,'loc':'$loc.coordinates'}}
     ]
 
-    target_restaurant_location =  mongo.db['food_business'].aggregate(location_query_pipeline)
+    target_restaurant_location =  mongo.db['foodbusiness'].aggregate(location_query_pipeline)
     target_coords = list(target_restaurant_location)[0]['loc']
 
     #radius/3959 will be search radius in radians
@@ -76,7 +76,7 @@ def find_nearby_restaurants_id(business_id, radius, limit):
         {'$group': {'_id':1, 'businesses': {'$push' : '$business_id'}}}
         ]
     
-    nearby_restaurant_id_mongo = mongo.db['food_business'].aggregate(neighbor_query_pipeline)
+    nearby_restaurant_id_mongo = mongo.db['foodbusiness'].aggregate(neighbor_query_pipeline)
     nearby_restaurant_id_list = list(nearby_restaurant_id_mongo)[0]['businesses']
 
     if business_id in nearby_restaurant_id_list:

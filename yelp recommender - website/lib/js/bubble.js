@@ -1,16 +1,13 @@
 function showBubbleChart(businessid, radius,start_date,end_date) {
 
-
+    console.warn('business id = ' + businessid);
     if (businessid == null) {
         businessid = "Sq596PqWNj7J0s-YAQmrQA";
         console.warn('Using sample biz_id = ' + businessid);
     }
 
-    console.log(businessid);
-
     if (radius == null) {
         radius = 1;
-        console.warn('Using sample radius =' + radius);
     }
 
     if (window.jQuery)
@@ -33,8 +30,8 @@ function showBubbleChart(businessid, radius,start_date,end_date) {
 
 function renderChart(d) {
     $("#bubblechart").html("");
-    var height = 400;
-    var width = 600;
+    var height = 600;
+    var width = 800;
     var margin = 60;
     var data =[];
     var sel_b_name ="";
@@ -80,16 +77,12 @@ function renderChart(d) {
 
 
         })
-
-
-
-
     }
     var labelX = 'Average Stars';
     var labelY = 'Polarity';
     var svg = d3.select('.bubblechart')
         .append('svg')
-        .attr('class', 'bubblechart')
+        .attr('class', 'bubblechart2')
         .attr("width", width + margin + margin)
         .attr("height", height + margin + margin)
         .append("g")
@@ -227,11 +220,11 @@ function renderChart(d) {
     legend = svg.append("g")
         //d3.select('.bubblechart svg').append("g")
         .attr("class","legend")
-        .attr("transform","translate(100,-2)")
+        .attr("transform","translate(860,-2)")
         .style("font-size","10px")
         .call(d3.legend);
 
-
+    svg = d3.select('.bubblechart2').attr("width", 1100);    
 }
 
 
